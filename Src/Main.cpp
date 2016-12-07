@@ -5,7 +5,7 @@
 
 int main()
 {
-	b2Vec2 gravity(0.0f, -10.0f);
+	/*b2Vec2 gravity(0.0f, -10.0f);
 	b2World world(gravity);
 
 	// Define the ground body.
@@ -88,7 +88,9 @@ int main()
         window.clear();
         window.draw(shape);
         window.display();
-    }
+    } */
 
+	AngryZPR::Root root;
+	while(root.run());
     return 0;
 }

@@ -1,11 +1,12 @@
 toolsets = gnu vs2010;
 program AngryZPR {
-    sources { Src/Main.cpp Src/Root.cpp Src/SystemManager.cpp} 
-    if ( $(toolset) == gnu )
+    sources { Src/Main.cpp Src/Root.cpp Src/SystemManager.cpp Src/StateManager.cpp } 
+    headers { Src/Root.h Src/SystemManager.h Src/StateManager.h Src/ControllerListener.h }
+    if ( $(toolset) == gnu ) {
       	cxx-compiler-options = "-std=c++11";
-    if ( $(toolset) == gnu )
-	libs = sfml-graphics;
-	libs += sfml-window;
-	libs += sfml-system;
-	libs += Box2D;
+		libs = sfml-graphics;
+		libs += sfml-window;
+		libs += sfml-system;
+		libs += Box2D;
+	}
 }

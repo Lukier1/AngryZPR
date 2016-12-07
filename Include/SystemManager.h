@@ -10,12 +10,15 @@
 
 #include <memory>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
+namespace AngryZPR {
 
 class SystemManager {
 private:
 	unsigned short mWindowH, mWindowW;
 
-	std::unique_ptr<sf::Window> window;
+	std::unique_ptr<sf::RenderWindow> mWindow;
 	SystemManager();
 
 	
@@ -23,9 +26,18 @@ public:
 	static SystemManager& getSingleton();
 	virtual ~SystemManager();
 	
-	void SetWindow(unsigned short w, unsigned short h);
+	void setWindow(unsigned short w, unsigned short h);
 	unsigned short getWindowH() const;
 	unsigned short getWindowW() const;
+
+	void eventPoll();
+
+	void beginDraw();
+	void endDraw();
+	void draw(const sf::Drawable& drawable, const sf::RenderStates& renderStates=sf::RenderStates::Default);
+
+	bool isOpen() const;
 };
 
+}
 #endif /* INCLUDE_SYSTEMMANAGER_H_ */

@@ -3,12 +3,22 @@
 #include "../Include/Root.h"
 #include "../Include/SystemManager.h"
 
+using namespace AngryZPR;
 Root::Root() {
-	std::cout << "Root created";
+	std::cout << "Root created" << std::endl;
 
-	InitSingleton();
+	initSingleton();
 }
 
-void Root::InitSingleton() {
+void Root::initSingleton() {
 	 SystemManager::getSingleton();
+}
+
+bool Root::run() {
+	SystemManager& sysMgr = SystemManager::getSingleton();
+	sysMgr.eventPoll();
+	sysMgr.beginDraw();
+	mStateManager.draw();
+	sysMgr.endDraw();
+	return sysMgr.isOpen();
 }
