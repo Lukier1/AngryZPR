@@ -22,14 +22,14 @@ ifeq ($(config),release)
 override config := Release
 endif
 ifeq ($(config),Debug)
-override CPPFLAGS += -DDEBUG
-override CFLAGS += -g -O0
-override CXXFLAGS += -g -O0
-override LDFLAGS += -g
+CPPFLAGS ?= -DDEBUG
+CFLAGS ?= -g -O0
+CXXFLAGS ?= -g -O0
+LDFLAGS ?= -g
 else ifeq ($(config),Release)
-override CPPFLAGS += -DNDEBUG
-override CFLAGS += -O2
-override CXXFLAGS += -O2
+CPPFLAGS ?= -DNDEBUG
+CFLAGS ?= -O2
+CXXFLAGS ?= -O2
 else ifneq (,$(config))
 $(warning Unknown configuration "$(config)")
 endif
@@ -43,34 +43,29 @@ CXX := c++
 # The directory for the build files, may be overridden on make command line.
 builddir = .
 
-ifneq ($(builddir),.)
-_builddir := $(builddir)/
-_builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
-$(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
-endif
-all: $(_builddir)AngryZPR
+all: $(builddir)/AngryZPR
 
-$(_builddir)AngryZPR: $(_builddir)AngryZPR_Main.o $(_builddir)AngryZPR_Root.o $(_builddir)AngryZPR_SystemManager.o $(_builddir)AngryZPR_StateManager.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)AngryZPR_Main.o $(_builddir)AngryZPR_Root.o $(_builddir)AngryZPR_SystemManager.o $(_builddir)AngryZPR_StateManager.o -lsfml-graphics -lsfml-window -lsfml-system -lBox2D -pthread
+$(builddir)/AngryZPR: $(builddir)/AngryZPR_Main.o $(builddir)/AngryZPR_Root.o $(builddir)/AngryZPR_SystemManager.o $(builddir)/AngryZPR_StateManager.o
+	$(CXX) -o $@ $(LDFLAGS) $(builddir)/AngryZPR_Main.o $(builddir)/AngryZPR_Root.o $(builddir)/AngryZPR_SystemManager.o $(builddir)/AngryZPR_StateManager.o -lsfml-graphics -lsfml-window -lsfml-system -lBox2D -pthread
 
-$(_builddir)AngryZPR_Main.o: Src/Main.cpp
+$(builddir)/AngryZPR_Main.o: Src/Main.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -std=c++11 Src/Main.cpp
 
-$(_builddir)AngryZPR_Root.o: Src/Root.cpp
+$(builddir)/AngryZPR_Root.o: Src/Root.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -std=c++11 Src/Root.cpp
 
-$(_builddir)AngryZPR_SystemManager.o: Src/SystemManager.cpp
+$(builddir)/AngryZPR_SystemManager.o: Src/SystemManager.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -std=c++11 Src/SystemManager.cpp
 
-$(_builddir)AngryZPR_StateManager.o: Src/StateManager.cpp
+$(builddir)/AngryZPR_StateManager.o: Src/StateManager.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -std=c++11 Src/StateManager.cpp
 
 clean:
-	rm -f $(_builddir)*.o
-	rm -f $(_builddir)*.d
-	rm -f $(_builddir)AngryZPR
+	rm -f *.o
+	rm -f *.d
+	rm -f $(builddir)/AngryZPR
 
 .PHONY: all clean
 
 # Dependencies tracking:
--include $(_builddir)*.d
+-include *.d

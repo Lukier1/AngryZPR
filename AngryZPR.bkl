@@ -1,4 +1,4 @@
-toolsets = gnu vs2010;
+toolsets = gnu vs2013;
 program AngryZPR {
     sources { Src/Main.cpp Src/Root.cpp Src/SystemManager.cpp Src/StateManager.cpp } 
     headers { Src/Root.h Src/SystemManager.h Src/StateManager.h Src/ControllerListener.h }
@@ -8,5 +8,27 @@ program AngryZPR {
 		libs += sfml-window;
 		libs += sfml-system;
 		libs += Box2D;
+	}
+	if ( $(toolset) == vs2013) {
+		includedirs  = Libs/SFML-2.4.1/include;
+		includedirs += Libs/Box2D/Include;
+		libdirs  = Libs/Box2D/Debug;
+		libdirs  += Libs/SFML-2.4.1/lib;
+		
+		libs = Box2D;
+		libs += flac;
+		libs += freetype;
+		libs += jpeg;
+		libs += ogg;
+		libs += openal32;
+		libs += sfml-audio-d;
+		libs += sfml-graphics-d;
+		libs += sfml-main-d;
+		libs += sfml-network-d;
+		libs += sfml-system-d;
+		libs += sfml-window-d;
+		libs += vorbis;
+		libs += vorbisenc;
+		libs += vorbisfile;
 	}
 }
