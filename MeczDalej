@@ -1,0 +1,12 @@
+sudo apt-get install g++
+sudo apt-get install git
+
+git clone https://github.com/Lukier1/AngryZPR.git
+
+cd AngryZPR
+sudo apt-get install cmake
+mkdir Libs
+cd Libs
+git clone https://github.com/erincatto/Box2D.git
+
+

@@ -12,10 +12,7 @@ Nastepnie terminalem wchodzimy do folderu bin, i tam wpisujemy sudo make install
 Dla SFML:
 git clone https://github.com/SFML/SFML.git
 Analogiczne kroki jak poprzednio i po skonczeniu Configure:
-sudo apt-get install libudev-dev
-sudo apt-get install libopenal-dev
-sudo apt-get install libflac-dev
-sudo apt-get install libvorbis-dev
+sudo apt-get install libudev-dev libopenal-dev libflac-dev libvorbis-dev libx11-dev
 Nastepnie Generate. 
 Nastepnie terminalem wchodzimy do folderu bin, i tam wpisujemy sudo make install.
 

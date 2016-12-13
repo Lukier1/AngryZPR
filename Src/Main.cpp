@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <Box2D/Box2D.h>
+#include "../Libs/boost_1_62_0/boot"
 #include "../Include/Root.h"
 
 int main()
