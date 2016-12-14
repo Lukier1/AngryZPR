@@ -44,6 +44,28 @@ void SystemManager::eventPoll() {
 	{
 		if (event.type == sf::Event::Closed)
 			mWindow->close();
+		switch (event.type) {
+			case sf::Event::EventType::MouseMoved:
+				updateMouseEvent(ControllerListener::MouseEvent::MOUSE_MOVE, event.mouseMove.x, event.mouseMove.y);
+				break;
+			case sf::Event::EventType::MouseButtonPressed:
+					if(event.mouseButton.button == sf::Mouse::Button::Left)
+						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_LBUTTON_PRESS, event.mouseButton.x, event.mouseButton.y);
+					if(event.mouseButton.button == sf::Mouse::Button::Right)
+						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_RBUTTON_PRESS, event.mouseButton.x, event.mouseButton.y);
+
+			break;
+			case sf::Event::EventType::MouseButtonReleased:
+
+					if(event.mouseButton.button == sf::Mouse::Button::Left)
+						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_LBUTTON_RELEASE, event.mouseButton.x, event.mouseButton.y);
+					if(event.mouseButton.button == sf::Mouse::Button::Right)
+						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_RBUTTON_RELEASE, event.mouseButton.x, event.mouseButton.y);
+
+			break;
+			default:
+				break;
+		}
 	}
 }
 
@@ -62,4 +84,42 @@ void SystemManager::draw(const Drawable& drawable, const RenderStates& renderSta
 
 bool SystemManager::isOpen() const {
 	return mWindow->isOpen();
+}
+
+
+void SystemManager::registerListener(ControllerListener * listener) {
+	if(listener != nullptr)
+	{
+		mContListeners.push_back(listener);
+	}
+}
+void SystemManager::deregisterListener(ControllerListener * listener) {
+	if(listener != nullptr) {
+		for(auto it = mContListeners.begin(); it != mContListeners.end(); ++it)
+		{
+			if(*it == listener)
+			{
+				mContListeners.erase(it);
+				break;
+			}
+		}
+	}
+}
+
+void AngryZPR::SystemManager::updateMouseEvent(ControllerListener::MouseEvent ev, float x, float y) {
+	for(auto list : mContListeners)
+	{
+		list->acceptMouseEvent(ev, x, y);
+	}
+}
+
+void AngryZPR::SystemManager::updateKeyEvent(ControllerListener::KeyEvent ev, sf::Keyboard::Key key) {
+	for(auto list : mContListeners)
+		{
+			list->acceptKeyEvent(ev, key);
+		}
+}
+
+unsigned int AngryZPR::SystemManager::getListenersNum() const {
+	return mContListeners.size();
 }

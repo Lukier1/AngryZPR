@@ -13,20 +13,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{52A9715D-BF4D-59BB-AF7B-F72689FBC696}</ProjectGuid>
+    <ProjectGuid>{13EF468E-CBAF-5A92-90E5-216CDC7D52E0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>AngryZPR</RootNamespace>
-    <ProjectName>AngryZPR</ProjectName>
+    <RootNamespace>test</RootNamespace>
+    <ProjectName>test</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
@@ -42,24 +42,27 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
     <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
     <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>Libs\SFML-2.4.1\include;Libs\Box2D\Include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>Libs\Box2D\Debug;Libs\SFML-2.4.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;flac.lib;freetype.lib;jpeg.lib;ogg.lib;openal32.lib;sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,29 +71,27 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>Libs\SFML-2.4.1\include;Libs\Box2D\Include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>Libs\Box2D\Debug;Libs\SFML-2.4.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;flac.lib;freetype.lib;jpeg.lib;ogg.lib;openal32.lib;sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Root.cpp" />
-    <ClCompile Include="Src\SystemManager.cpp" />
-    <ClCompile Include="Src\StateManager.cpp" />
+    <ClCompile Include="Src\test_foo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Root.h" />
-    <ClInclude Include="Src\SystemManager.h" />
-    <ClInclude Include="Src\StateManager.h" />
-    <ClInclude Include="Src\ControllerListener.h" />
+    <ProjectReference Include="AngryZPR.vcxproj">
+      <Project>{52a9715d-bf4d-59bb-af7b-f72689fbc696}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

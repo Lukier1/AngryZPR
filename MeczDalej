@@ -8,5 +8,6 @@ sudo apt-get install cmake
 mkdir Libs
 cd Libs
 git clone https://github.com/erincatto/Box2D.git
+git clone https://github.com/SFML/SFML.git
 
-
+cd Box2D/Box2D

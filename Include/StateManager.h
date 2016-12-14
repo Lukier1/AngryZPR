@@ -23,6 +23,7 @@ private:
 
 	GameState mGameState;
 
+
 public:
 	StateManager();
 	virtual ~StateManager();

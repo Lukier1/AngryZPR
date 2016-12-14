@@ -1,13 +1,18 @@
 toolsets = gnu vs2013;
-program AngryZPR {
-    sources { Src/Main.cpp Src/Root.cpp Src/SystemManager.cpp Src/StateManager.cpp } 
+
+library AngryZPR {
+    sources { Src/Root.cpp Src/SystemManager.cpp Src/StateManager.cpp }
+ 
     headers { Src/Root.h Src/SystemManager.h Src/StateManager.h Src/ControllerListener.h }
+
 	if ( $(toolset) == gnu ) {
 		cxx-compiler-options = "-std=c++11";
 		libs = sfml-graphics;
 		libs += sfml-window;
 		libs += sfml-system;
 		libs += Box2D;
+		
+		includedirs  = Libs/boost_1_62_0;
 	}
 	if ( $(toolset) == vs2013) {
 		includedirs  = Libs/SFML-2.4.1/include;
@@ -31,4 +36,16 @@ program AngryZPR {
 		libs += vorbisenc;
 		libs += vorbisfile;
 	}
+}
+
+
+program test {
+	deps = AngryZPR;
+	sources { Src/test_foo.cpp }
+}
+
+
+program game {
+	deps = AngryZPR;
+	 sources { Src/Main.cpp }
 }

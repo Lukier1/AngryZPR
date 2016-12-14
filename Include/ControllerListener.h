@@ -12,7 +12,20 @@
 namespace AngryZPR {
 	class ControllerListener {
 	public:
-		virtual void accept(const sf::Event &event) = 0;
+		enum class MouseEvent {
+			MOUSE_LBUTTON_PRESS,
+			MOUSE_RBUTTON_PRESS,
+			MOUSE_LBUTTON_RELEASE,
+			MOUSE_RBUTTON_RELEASE,
+			MOUSE_MOVE
+		};
+		enum class KeyEvent {
+			KEY_PRESS,
+			KEY_RELASE
+		};
+
+		virtual void acceptMouseEvent(MouseEvent ev, float x, float y);
+		virtual void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key);
 	};
 }
 

@@ -9,8 +9,11 @@
 #define INCLUDE_SYSTEMMANAGER_H_
 
 #include <memory>
+#include <vector>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
+#include "ControllerListener.h"
 
 namespace AngryZPR {
 
@@ -20,8 +23,11 @@ private:
 
 	std::unique_ptr<sf::RenderWindow> mWindow;
 	SystemManager();
-
+	std::vector<ControllerListener*> mContListeners;
 	
+	void updateMouseEvent(ControllerListener::MouseEvent ev, float x, float y);
+	void updateKeyEvent(ControllerListener::KeyEvent ev, sf::Keyboard::Key key);
+
 public:
 	static SystemManager& getSingleton();
 	virtual ~SystemManager();
@@ -37,6 +43,11 @@ public:
 	void draw(const sf::Drawable& drawable, const sf::RenderStates& renderStates=sf::RenderStates::Default);
 
 	bool isOpen() const;
+
+	void registerListener(ControllerListener * listener);
+	void deregisterListener(ControllerListener * listener);
+
+	unsigned int getListenersNum() const;
 };
 
 }

@@ -22,7 +22,8 @@ public:
 	StateManager mStateManager;
 private:
 	void initSingleton();
-
+	void RegisterControlListener(ControllerListener  * listener);
+	void DeregisterControlListener(ControllerListener  * listener);
 };
 }
 

@@ -22,3 +22,4 @@ bool Root::run() {
 	sysMgr.endDraw();
 	return sysMgr.isOpen();
 }
+
