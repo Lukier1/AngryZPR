@@ -12,11 +12,12 @@ library AngryZPR {
 		libs += sfml-system;
 		libs += Box2D;
 		
-		includedirs  = Libs/boost_1_62_0;
+		
 	}
 	if ( $(toolset) == vs2013) {
 		includedirs  = Libs/SFML-2.4.1/include;
 		includedirs += Libs/Box2D/Include;
+		includedirs += Libs/boost_1_62_0;
 		libdirs  = Libs/Box2D/Debug;
 		libdirs  += Libs/SFML-2.4.1/lib;
 	
@@ -41,7 +42,9 @@ library AngryZPR {
 
 program test {
 	deps = AngryZPR;
-	sources { Src/test_foo.cpp }
+	sources { Src/Mocktest.cpp Src/Mock.cpp  }
+	headers { Include/Mock.h }
+	includedirs  = Libs/boost_1_62_0;
 }
 
 

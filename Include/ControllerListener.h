@@ -24,8 +24,8 @@ namespace AngryZPR {
 			KEY_RELASE
 		};
 
-		virtual void acceptMouseEvent(MouseEvent ev, float x, float y);
-		virtual void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key);
+		virtual void acceptMouseEvent(MouseEvent ev, float x, float y) = 0;
+		virtual void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) = 0;
 	};
 }
 

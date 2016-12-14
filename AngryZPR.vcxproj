@@ -54,7 +54,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>Libs\SFML-2.4.1\include;Libs\Box2D\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Libs\SFML-2.4.1\include;Libs\Box2D\Include;Libs\boost_1_62_0</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -71,7 +71,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>Libs\SFML-2.4.1\include;Libs\Box2D\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Libs\SFML-2.4.1\include;Libs\Box2D\Include;Libs\boost_1_62_0</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

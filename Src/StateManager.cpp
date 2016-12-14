@@ -42,16 +42,11 @@ void StateManager::update() {
 	case GameState::DESTROY:
 		break;
 	}
+	
 }
 
-void StateManager::accept(const sf::Event& event) {
-	switch(mGameState)
-	{
-	case GameState::BUILD:
-		break;
-	case GameState::DESTROY:
-		break;
-	}
+void StateManager::changeState(GameState state) {
+
 }
 
 } /* namespace AngryZPR */

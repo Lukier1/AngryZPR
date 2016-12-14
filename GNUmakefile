@@ -55,19 +55,22 @@ $(_builddir)libAngryZPR.a: $(_builddir)AngryZPR_Root.o $(_builddir)AngryZPR_Syst
 	$(RANLIB) $@
 
 $(_builddir)AngryZPR_Root.o: Src/Root.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -ILibs/boost_1_62_0 -std=c++11 Src/Root.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -std=c++11 Src/Root.cpp
 
 $(_builddir)AngryZPR_SystemManager.o: Src/SystemManager.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -ILibs/boost_1_62_0 -std=c++11 Src/SystemManager.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -std=c++11 Src/SystemManager.cpp
 
 $(_builddir)AngryZPR_StateManager.o: Src/StateManager.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -ILibs/boost_1_62_0 -std=c++11 Src/StateManager.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -std=c++11 Src/StateManager.cpp
 
-$(_builddir)test: $(_builddir)test_test_foo.o $(_builddir)libAngryZPR.a
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)test_test_foo.o $(_builddir)libAngryZPR.a -lsfml-graphics -lsfml-window -lsfml-system -lBox2D -pthread
+$(_builddir)test: $(_builddir)test_Mocktest.o $(_builddir)test_Mock.o $(_builddir)libAngryZPR.a
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)test_Mocktest.o $(_builddir)test_Mock.o $(_builddir)libAngryZPR.a -lsfml-graphics -lsfml-window -lsfml-system -lBox2D -pthread
 
-$(_builddir)test_test_foo.o: Src/test_foo.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread Src/test_foo.cpp
+$(_builddir)test_Mocktest.o: Src/Mocktest.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -ILibs/boost_1_62_0 Src/Mocktest.cpp
+
+$(_builddir)test_Mock.o: Src/Mock.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -ILibs/boost_1_62_0 Src/Mock.cpp
 
 $(_builddir)game: $(_builddir)game_Main.o $(_builddir)libAngryZPR.a
 	$(CXX) -o $@ $(LDFLAGS) $(_builddir)game_Main.o $(_builddir)libAngryZPR.a -lsfml-graphics -lsfml-window -lsfml-system -lBox2D -pthread

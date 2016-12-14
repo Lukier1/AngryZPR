@@ -15,22 +15,27 @@
 namespace AngryZPR {
 
 class StateManager : public ControllerListener {
-private:
+
+
+public:
 	enum class GameState {
 		DESTROY,
 		BUILD
 	};
 
-	GameState mGameState;
-
-
-public:
 	StateManager();
 	virtual ~StateManager();
 
 	void draw();
 	void update();
-	void accept(const sf::Event &event);
+	
+	void changeState(GameState state);
+
+	void acceptMouseEvent(MouseEvent ev, float x, float y) { };
+	void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) { };
+private:
+	GameState mGameState;
+
 };
 
 } /* namespace AngryZPR */
