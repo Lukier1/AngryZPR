@@ -1,10 +1,13 @@
 #ifndef __MOCK_H__
 #define __MOCK_H__
+#include <map>
+#include <string>
+
 namespace AngryZPR {
-	#include <map>
+
 	class Mock {
 	private:
-		Map<std::string, int> mExecuteNum;
+		std::map<std::string, int> mExecuteNum;
 	protected:
 		void execute(std::string methodName);
 
