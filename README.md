@@ -1,8 +1,9 @@
 # AngryZPR
 
 # Paczki bibliotek
-Linux:
-Windows(skompilowane):
+Linux: https://www.dropbox.com/s/hhl13o23lruxfdw/UnixLibs.tar.gz?dl=0
+
+Windows(skompilowane): https://www.dropbox.com/s/bahe43x4d9po6x0/WindowsLibs.7z?dl=0
 
 # Budowanie Ubuntu/Mint: 
 
