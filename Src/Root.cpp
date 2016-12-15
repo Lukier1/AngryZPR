@@ -2,6 +2,7 @@
 
 #include "../Include/Root.h"
 #include "../Include/SystemManager.h"
+#include "../Include/StateManager.h"
 
 using namespace AngryZPR;
 Root::Root() {
