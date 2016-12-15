@@ -83,9 +83,23 @@ sudo make install
 
 # Windows instalacja
 Ściąganie repozytorium:
+
 W konsoli:
+
 git clone https://github.com/Lukier1/AngryZPR.git
+
 Nastepnie kopiujemy folder Libs do folderu AngryZPR
+
+Żeby utworzyć pliki z projektem dla Visuala:
+
 Otwieramy konsole w folderze AngryZPR
+
 W konsoli wpisujemy 
 
+Libs\bakefile-1.2.5.1_beta-win\bkl.exe AngryZPR.bkl
+
+Nastepnie otwieramy przy pomocy Visual Studio plik AngryZPR.sln
+
+Jeżeli mamy innego Visual Studio niż 2013 to we właściowściach każdego projektu(prawym przyciskiem myszy na projekt a nastepnie wybieramy Properties) w zakładce General zmienamy wartośc Platform Toolset na ten który jest zainstalowane.
+
+Teraz zmieniając uruchamiany projektu za pomocą Set as Startup Project z menu kontekstowego projektu wybieramy czy chcemy wykonać testy czy uruchomić grę.
