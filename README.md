@@ -7,8 +7,11 @@ Windows(skompilowane):
 # Budowanie Ubuntu/Mint: 
 
 Ściąganie repozytorium:
+
 W konsoli:
+
 git clone https://github.com/Lukier1/AngryZPR.git
+
 cd AngryZPR
 
 Kopiujemy folder Libs do folderu AngryZPR.
@@ -19,6 +22,7 @@ sudo apt-get install sudo apt-get install cmake-gui
 
 --------------------------------------------------------
 Dla Box2D:
+
 W CMake:
 Source code: Na folder gdzie jest plik CMakeList.txt(Libs/Box2D/Box2D)
 Binary code: To ten sam folder tylko dopisujemy /bin na koncu (to bedzie miejsce gdzie zostana utowrzony makefile)
@@ -49,6 +53,7 @@ Terminalem wchodzimy do nowo utworzonego folderu bin, i tam wpisujemy sudo make 
 
 --------------------------------------------------------
 Kompilacja:
+
 Aby skompilować wchodzimy z konsoli do folderu AngryZPR(znajduję się tam plik AngryZPR.bkl) i nastepne poleceniami budujemy:
 
 Libs/bakefile/bkl AngryZPR.bkl
@@ -57,6 +62,7 @@ make
 
 --------------------------------------------------------
 Uruchamianie:
+
 Do uruchomienia gry:
 
 ./game
@@ -67,6 +73,7 @@ Do uruchomienia testów:
 
 ---------------------------------------------------------
 Znane problemy:
+
 Bład przy uruchomieniu gry że nie ma bibliotek sfml.
 Aby ten błąd naprawiać należy przy konfiguracji projektu sfml zmienić wartość CMAKE_INSTALL_PREFIX z /usr/local na /usr 
 I następnie wygenerować makefile dla SFML ponownie(poprzez przycisk Generate) i w folderze bin, powinniśmy wpisać polecenie 
