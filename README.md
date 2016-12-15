@@ -13,7 +13,8 @@ cd AngryZPR
 
 Kopiujemy folder Libs do folderu AngryZPR.
 
-Jeśli nie posiadamy CMake-GUI to instalujemy go za pomocą narzędzia. 
+Jeśli nie posiadamy CMake-GUI to instalujemy go za pomocą komendy:
+
 sudo apt-get install sudo apt-get install cmake-gui
 
 --------------------------------------------------------
@@ -33,6 +34,7 @@ Nastepnie terminalem wchodzimy do nowo utworzonego folderu bin, i tam wpisujemy 
 --------------------------------------------------------
 Dla SFML:
 Instalujemy z początku potrzebne biblioteki:
+
 sudo apt-get install libfreetype6-dev libjpeg-dev libx11-dev libxrandr-dev libx11-xcb-dev libxcb-randr0-dev libxcb-image0-dev  libogg-dev libudev-dev libopenal-dev libflac-dev libvorbis-dev libx11-dev freeglut3-dev
 
 Potem w CMake:
@@ -48,22 +50,28 @@ Terminalem wchodzimy do nowo utworzonego folderu bin, i tam wpisujemy sudo make 
 --------------------------------------------------------
 Kompilacja:
 Aby skompilować wchodzimy z konsoli do folderu AngryZPR(znajduję się tam plik AngryZPR.bkl) i nastepne poleceniami budujemy:
+
 Libs/bakefile/bkl AngryZPR.bkl
+
 make
 
 --------------------------------------------------------
 Uruchamianie:
 Do uruchomienia gry:
+
 ./game
 
 Do uruchomienia testów:
+
 ./test
 
 ---------------------------------------------------------
 Znane problemy:
 Bład przy uruchomieniu gry że nie ma bibliotek sfml.
 Aby ten błąd naprawiać należy przy konfiguracji projektu sfml zmienić wartość CMAKE_INSTALL_PREFIX z /usr/local na /usr 
-I następnie wygenerować makefile dla SFML ponownie(poprzez przycisk Generate) i w folderze bin, powinniśmy wpisać polecenie sudo make install  .
+I następnie wygenerować makefile dla SFML ponownie(poprzez przycisk Generate) i w folderze bin, powinniśmy wpisać polecenie 
+
+sudo make install 
 
 
 # Windows instalacja
