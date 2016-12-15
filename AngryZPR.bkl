@@ -19,7 +19,8 @@ library AngryZPR {
 		includedirs += Libs/Box2D/Include;
 		libdirs  = Libs/Box2D/Debug;
 		libdirs  += Libs/SFML-2.4.1/lib;
-	
+		includedirs  = Libs/boost_1_62_0;
+		
 		libs = Box2D;
 		libs += flac;
 		libs += freetype;
@@ -41,7 +42,7 @@ library AngryZPR {
 
 program test {
 	deps = AngryZPR;
-	sources { Src/Mocktest.cpp Src/Mock.cpp  }
+	sources { Src/MockTest.cpp Src/Mock.cpp  }
 	headers { Include/Mock.h }
 	includedirs  = Libs/boost_1_62_0;
 	

@@ -8,12 +8,16 @@
 #ifndef INCLUDE_WORLDIMPL_H_
 #define INCLUDE_WORLDIMPL_H_
 
+#include <Box2D/Box2D.h>
 #include "World.h"
 
 namespace AngryZPR {
 
 	class WorldImpl : public World {
 	private:
+		b2Vec2 mGravity;
+		b2World mWorld;
+
 		World::Camera mCamera;
 	public:
 		WorldImpl();
@@ -24,6 +28,8 @@ namespace AngryZPR {
 
 		void draw();
 		void update(float time);
+
+		void addPhyicObject();
 	};
 
 } /* namespace AngryZPR */

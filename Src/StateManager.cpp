@@ -7,13 +7,14 @@
 
 #include "../Include/StateManager.h"
 #include "../Include/SystemManager.h"
+#include "../Include/WorldImpl.h".h"
 
 #include <SFML/Graphics.hpp>
 namespace AngryZPR {
 
 StateManager::StateManager()  : mGameState(GameState::BUILD){
 	// TODO Auto-generated constructor stub
-
+	mWorld = new WorldImpl();
 }
 
 StateManager::~StateManager() {
@@ -25,7 +26,7 @@ void StateManager::draw() {
 	switch(mGameState)
 	{
 	case GameState::BUILD:
-
+		mWorld->draw();
 		shape.setFillColor(sf::Color::Cyan);
 		SystemManager::getSingleton().draw(shape);
 		break;

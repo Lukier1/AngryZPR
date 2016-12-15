@@ -1,11 +1,13 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 
+
 #include "ControllerListener.h"
 
 namespace AngryZPR {
 
 class World : public ControllerListener {
+
 public:
 	struct Camera {
 		float X, Y;
@@ -17,7 +19,7 @@ public:
 	virtual void draw() = 0;
 	virtual void update(float time) = 0;
 
-	virtual void addPhyicObject();
+	virtual void addPhyicObject() = 0;
 
 };
 

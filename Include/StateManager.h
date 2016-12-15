@@ -10,7 +10,7 @@
 
 
 #include "../Include/ControllerListener.h"
-
+#include "../Include/World.h"
 
 namespace AngryZPR {
 
@@ -35,6 +35,7 @@ public:
 	void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) { };
 private:
 	GameState mGameState;
+	World * mWorld;
 
 };
 

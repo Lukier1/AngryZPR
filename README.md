@@ -1,5 +1,9 @@
 # AngryZPR
 
+# Paczki bibliotek
+Linux:
+Windows(skompilowane):
+
 # Budowanie Ubuntu/Mint: 
 
 Ściąganie repozytorium:
@@ -60,4 +64,13 @@ Znane problemy:
 Bład przy uruchomieniu gry że nie ma bibliotek sfml.
 Aby ten błąd naprawiać należy przy konfiguracji projektu sfml zmienić wartość CMAKE_INSTALL_PREFIX z /usr/local na /usr 
 I następnie wygenerować makefile dla SFML ponownie(poprzez przycisk Generate) i w folderze bin, powinniśmy wpisać polecenie sudo make install  .
+
+
+# Windows instalacja
+Ściąganie repozytorium:
+W konsoli:
+git clone https://github.com/Lukier1/AngryZPR.git
+Nastepnie kopiujemy folder Libs do folderu AngryZPR
+Otwieramy konsole w folderze AngryZPR
+W konsoli wpisujemy 
 
