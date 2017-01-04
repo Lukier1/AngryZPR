@@ -8,6 +8,8 @@
 #ifndef INCLUDE_WORLDIMPL_H_
 #define INCLUDE_WORLDIMPL_H_
 
+#include <memory>
+
 #include <Box2D/Box2D.h>
 #include "World.h"
 
@@ -19,6 +21,8 @@ namespace AngryZPR {
 		b2World mWorld;
 
 		World::Camera mCamera;
+
+		std::vector<std::unique_ptr<WorldObject>> mObjects;
 	public:
 		WorldImpl();
 		virtual ~WorldImpl();

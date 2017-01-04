@@ -23,7 +23,7 @@ private:
 
 	std::unique_ptr<sf::RenderWindow> mWindow;
 	SystemManager();
-	std::vector<ControllerListener*> mContListeners;
+	std::vector<std::shared_ptr<ControllerListener>> mContListeners;
 	
 	void updateMouseEvent(ControllerListener::MouseEvent ev, float x, float y);
 	void updateKeyEvent(ControllerListener::KeyEvent ev, sf::Keyboard::Key key);
@@ -44,8 +44,8 @@ public:
 
 	bool isOpen() const;
 
-	void registerListener(ControllerListener * listener);
-	void deregisterListener(ControllerListener * listener);
+	void registerListener(std::shared_ptr<ControllerListener> listener);
+	void deregisterListener(std::shared_ptr<ControllerListener> listener);
 
 	unsigned int getListenersNum() const;
 };

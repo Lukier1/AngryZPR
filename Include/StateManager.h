@@ -8,6 +8,7 @@
 #ifndef STATEMANAGER_H_
 #define STATEMANAGER_H_
 
+#include <memory>
 
 #include "../Include/ControllerListener.h"
 #include "../Include/World.h"
@@ -35,7 +36,7 @@ public:
 	void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) { };
 private:
 	GameState mGameState;
-	World * mWorld;
+	std::shared_ptr<World> mWorld;
 
 };
 

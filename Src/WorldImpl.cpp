@@ -29,6 +29,11 @@ void WorldImpl::acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) {
 }
 
 void WorldImpl::draw() {
+	for(auto objects : WorldObject)
+	{
+		
+	}
+
 	sf::RectangleShape shape(sf::Vector2f(100, 100));
 
 	shape.setFillColor(sf::Color::Cyan);

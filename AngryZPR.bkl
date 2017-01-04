@@ -42,10 +42,12 @@ library AngryZPR {
 
 program test {
 	deps = AngryZPR;
-	sources { Src/MockTest.cpp Src/Mock.cpp  }
+	sources { Test/MockTest.cpp Src/Mock.cpp  }
 	headers { Include/Mock.h }
 	includedirs  = Libs/boost_1_62_0;
-	
+	if ( $(toolset) == gnu ) {
+		cxx-compiler-options = "-std=c++11";
+	}
 }
 
 
@@ -57,5 +59,8 @@ program game {
 		includedirs += Libs/Box2D/Include;
 		libdirs  = Libs/Box2D/Debug;
 		libdirs  += Libs/SFML-2.4.1/lib;
+	}
+	if ( $(toolset) == gnu ) {
+		cxx-compiler-options = "-std=c++11";
 	}
 }

@@ -5,8 +5,10 @@
  *      Author: lukier
  */
 
-#include "../Include/SystemManager.h"
 #include <iostream>
+
+#include "../Include/SystemManager.h"
+
 using namespace sf;
 using namespace AngryZPR;
 SystemManager::SystemManager() : mWindowH(600), mWindowW(800), mWindow(new RenderWindow(VideoMode(mWindowH, mWindowH,32),"AngryZPR")){
@@ -87,13 +89,23 @@ bool SystemManager::isOpen() const {
 }
 
 
-void SystemManager::registerListener(ControllerListener * listener) {
+void SystemManager::registerListener(std::shared_ptr<ControllerListener> listener) {
 	if(listener != nullptr)
 	{
-		mContListeners.push_back(listener);
+		bool exist = false;
+		for(auto it = mContListeners.begin(); it != mContListeners.end(); ++it)
+		{
+			if(*it == listener)
+			{
+				exist = true; 
+				break;
+			}
+		}
+		if(!exist)
+			mContListeners.push_back(listener);
 	}
 }
-void SystemManager::deregisterListener(ControllerListener * listener) {
+void SystemManager::deregisterListener(std::shared_ptr<ControllerListener> listener) {
 	if(listener != nullptr) {
 		for(auto it = mContListeners.begin(); it != mContListeners.end(); ++it)
 		{
