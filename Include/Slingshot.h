@@ -1,0 +1,52 @@
+/*
+ * Slingshot.h
+ *
+ *  Created on: Jan 10, 2017
+ *      Author: lukier
+ */
+
+#ifndef INCLUDE_SLINGSHOT_H_
+#define INCLUDE_SLINGSHOT_H_
+
+#include "World.h"
+#include "WorldObject.h"
+#include "Bird.h"
+
+namespace AngryZPR {
+
+class Slingshot: public WorldObject {
+public:
+	Slingshot();
+	virtual ~Slingshot();
+
+	void draw(const World::Camera &camera);
+
+	void setPreload(const World::Camera &camera, float x, float y);
+	bool fire();
+	Bird * setBird(Bird * bird);
+
+	bool isPreloading();
+	float update(float time);
+	bool isOverlapping(const World::Camera &camera, float x, float y);
+private:
+	enum class STATE {
+		IDLE,
+		PRELOADING,
+		SHOOTING
+	};
+
+	const float WIDTH = 10.0f;
+	const float HEIGHT = 100.0f;
+
+	Bird * mBird = nullptr;
+
+	float forceTime = 0.0f;
+
+	float mPreX = 0.0f, mPreY = 0.0f;
+
+	STATE mState;
+};
+
+} /* namespace AngryZPR */
+
+#endif /* INCLUDE_SLINGSHOT_H_ */

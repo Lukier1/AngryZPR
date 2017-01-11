@@ -18,9 +18,15 @@ void Root::initSingleton() {
 bool Root::run() {
 	SystemManager& sysMgr = SystemManager::getSingleton();
 	sysMgr.eventPoll();
+
+	mStateManager.update();
+
 	sysMgr.beginDraw();
 	mStateManager.draw();
 	sysMgr.endDraw();
+
+
+
 	return sysMgr.isOpen();
 }
 

@@ -12,7 +12,8 @@
 
 #include <Box2D/Box2D.h>
 #include "World.h"
-
+#include "WorldObject.h"
+#include "Slingshot.h"
 namespace AngryZPR {
 
 	class WorldImpl : public World {
@@ -22,7 +23,12 @@ namespace AngryZPR {
 
 		World::Camera mCamera;
 
-		std::vector<std::unique_ptr<WorldObject>> mObjects;
+		std::vector<WorldObject*> mObjects;
+		b2Body * mGroundBody;
+		Slingshot * mSlingshot;
+
+		const int32 VELOCITY_ITERATIONS = 6;
+		const int32 POSTION_ITERATIONS = 2;
 	public:
 		WorldImpl();
 		virtual ~WorldImpl();

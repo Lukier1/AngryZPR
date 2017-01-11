@@ -9,6 +9,7 @@
 #define STATEMANAGER_H_
 
 #include <memory>
+#include <chrono>
 
 #include "../Include/ControllerListener.h"
 #include "../Include/World.h"
@@ -37,6 +38,9 @@ public:
 private:
 	GameState mGameState;
 	std::shared_ptr<World> mWorld;
+
+	std::chrono::steady_clock::time_point mLastFrameTime;
+
 
 };
 

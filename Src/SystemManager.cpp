@@ -11,7 +11,7 @@
 
 using namespace sf;
 using namespace AngryZPR;
-SystemManager::SystemManager() : mWindowH(600), mWindowW(800), mWindow(new RenderWindow(VideoMode(mWindowH, mWindowH,32),"AngryZPR")){
+SystemManager::SystemManager() : mWindowH(600), mWindowW(800), mWindow(new RenderWindow(VideoMode(mWindowW, mWindowH,32),"AngryZPR")){
 	// TODO Auto-generated constructor stub
 
 }

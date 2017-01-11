@@ -9,10 +9,14 @@
 #include "../Include/SystemManager.h"
 #include "../Include/WorldImpl.h"
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 namespace AngryZPR {
 
-StateManager::StateManager()  : mGameState(GameState::BUILD), mWorld(new WorldImpl()) {
+StateManager::StateManager()  : mGameState(GameState::DESTROY), mWorld(new WorldImpl()) {
+	changeState(mGameState);
+
+	mLastFrameTime = std::chrono::steady_clock::now();
 	// TODO Auto-generated constructor stub
 }
 
@@ -25,21 +29,26 @@ void StateManager::draw() {
 	switch(mGameState)
 	{
 	case GameState::BUILD:
-		mWorld->draw();
-		shape.setFillColor(sf::Color::Cyan);
-		SystemManager::getSingleton().draw(shape);
+
 		break;
 	case GameState::DESTROY:
+		mWorld->draw();
 		break;
 	}
 }
 
 void StateManager::update() {
+	std::chrono::steady_clock::time_point actualTime = std::chrono::steady_clock::now();
+	int durationInMs = std::chrono::duration_cast<std::chrono::microseconds>(actualTime - mLastFrameTime).count();
+	float durationInSec = (float)durationInMs/1.0f;
+	mLastFrameTime = actualTime;
 	switch(mGameState)
 	{
 	case GameState::BUILD:
+
 		break;
 	case GameState::DESTROY:
+		mWorld->update(durationInSec);
 		break;
 	}
 	

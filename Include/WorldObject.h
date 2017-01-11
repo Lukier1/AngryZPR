@@ -7,7 +7,6 @@ namespace AngryZPR {
 	class WorldObject {
 	protected:
 		float mX, mY;
-
 	public:
 		virtual void draw(const World::Camera &camera) = 0;
 
