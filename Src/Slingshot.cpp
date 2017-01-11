@@ -78,7 +78,12 @@ void Slingshot::setPreload(const World::Camera &camera, float x, float y) {
 	if( mState == STATE::PRELOADING || mState == STATE::IDLE) {
 		float relX = x+camera.X-getX();
 		float relY = y+camera.Y-getY();
-
+		float sqL = sqrt(relX*relX + relY*relY);
+		if(sqL > MAX_PRELOAD)
+		{
+			relX = relX * MAX_PRELOAD/sqL;
+			relY = relY * MAX_PRELOAD/sqL; 
+		}
 		mPreX = relX;
 		mPreY = relY;
 
@@ -91,14 +96,21 @@ bool Slingshot::isPreloading()
 {
 	return mState == STATE::PRELOADING;
 }
-bool Slingshot::fire() {
+Slingshot::Shot Slingshot::fire() {
+	Shot shot;
 	if(mState == STATE::PRELOADING) {
 		std::cout << "FIRE" << std::endl;
 		mState = STATE::IDLE;
-		return true;
+		shot.x = mPreX+getX();
+		shot.y = mPreY+getY();
+		shot.done = true;
+		return shot;
 	}
-	return false;
-
+	else
+	{
+		shot.done = false;
+		return shot;
+	}
 }
 
 } /* namespace AngryZPR */

@@ -1,5 +1,5 @@
 /*
- * Bird.cpp
+ * Block.cpp
  *
  *  Created on: Jan 10, 2017
  *      Author: lukier
@@ -9,32 +9,33 @@
 #include <SFML/Graphics.hpp>
 #include "../Include/SystemManager.h"
 
-#include "../Include/Bird.h"
+#include "../Include/Block.h"
 #include "../Include/Constants.h"
 namespace AngryZPR {
 
-Bird::Bird(b2Body * _body)  : PhysicObject(_body) {
+Block::Block(b2Body * _body)  : PhysicObject(_body) {
 	// TODO Auto-generated constructor stub
 
 }
 
-Bird::~Bird() {
+Block::~Block() {
 	// TODO Auto-generated destructor stub
 }
-void Bird::draw(const World::Camera &camera) {
+void Block::draw(const World::Camera &camera) {
 	mX = mBody->GetPosition().x/WORLD_SCALE;
 	mY = -mBody->GetPosition().y/WORLD_SCALE-WORLD_SCALE*10;
 	float angle = mBody->GetAngle();
-	sf::CircleShape circle(16.0f);
-	sf::RectangleShape rect(sf::Vector2f(10.0f, 10.0f));
-	rect.setFillColor(sf::Color::Yellow);
-	rect.setRotation(angle*180/3.14);
-	rect.setOrigin(sf::Vector2f(5.0f, 5.0f));
+
+	sf::RectangleShape rect(sf::Vector2f(10.0f, 50.0f));
+	rect.setRotation(-angle*180/3.14);
+	rect.setFillColor(sf::Color::Black);
+	rect.setOrigin(sf::Vector2f(5.0f, 25.0f));
 	rect.setPosition(mX, mY);
+
 	SystemManager::getSingleton().draw(rect);
 }
 
-Bird * Bird::createBird(b2World &world, float x, float y)  {
+Block * Block::create(b2World &world, float x, float y)  {
 
 	b2FixtureDef fixtureDef;
 	b2PolygonShape dynamicBox;
@@ -43,29 +44,18 @@ Bird * Bird::createBird(b2World &world, float x, float y)  {
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(x*WORLD_SCALE, -y*WORLD_SCALE);
 
-	dynamicBox.SetAsBox(5.0f,5.0f);
+	dynamicBox.SetAsBox(5.0f,25.0f);
 
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
+	fixtureDef.friction = 0.8f;
 
 	b2Body * body = world.CreateBody(&bodyDef);
 
 	body->CreateFixture(&fixtureDef);
-	body->SetSleepingAllowed(false);
-	return new Bird(body);
+
+	return new Block(body);
 }
 
 
-Bird * Bird::temp(b2Body * body) {
-	return new Bird(body);
-}
-/*
-b2PolygonShape PhysicObject::getPolygonShape() const {
-	return mPolygonShape;
-}
-
-b2FixtureDef PhysicObject::getFixtureDef() const {
-	return mFixtureDef;
-}*/
 } /* namespace AngryZPR */

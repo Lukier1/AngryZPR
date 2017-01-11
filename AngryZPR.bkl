@@ -1,9 +1,9 @@
 toolsets = gnu vs2013;
 
 library AngryZPR {
-    sources { Src/Root.cpp Src/SystemManager.cpp Src/StateManager.cpp Src/WorldImpl.cpp Src/WorldObject.cpp Src/Slingshot.cpp Src/Bird.cpp Src/PhysicObject.cpp}
+    sources { Src/Root.cpp Src/SystemManager.cpp Src/StateManager.cpp Src/WorldImpl.cpp Src/WorldObject.cpp Src/Slingshot.cpp Src/Bird.cpp Src/PhysicObject.cpp Src/Block.cpp}
  
-    headers { Include/Root.h Include/SystemManager.h Include/StateManager.h Include/WorldImpl.h Include/WorldObject.h  Include/Bird.h Include/Slingshot.h Include/PhysicObject.h }
+    headers { Include/Root.h Include/SystemManager.h Include/StateManager.h Include/WorldImpl.h Include/WorldObject.h  Include/Bird.h Include/Slingshot.h Include/PhysicObject.h Include/Block.h }
 
 	if ( $(toolset) == gnu ) {
 		cxx-compiler-options = "-std=c++11";

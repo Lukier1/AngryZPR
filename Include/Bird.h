@@ -22,7 +22,7 @@ public:
 	virtual ~Bird();
 
 	virtual void draw(const World::Camera &camera);
-	static Bird * createBird(b2World &world, float x, float y, float forcePower, float angle);
+	static Bird * createBird(b2World &world, float x, float y);
 	static Bird * temp(b2Body * body);
 };
 

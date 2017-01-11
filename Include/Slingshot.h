@@ -16,13 +16,18 @@ namespace AngryZPR {
 
 class Slingshot: public WorldObject {
 public:
+	struct Shot {
+		float x, y; 
+		bool done; 
+	};
+
 	Slingshot();
 	virtual ~Slingshot();
 
 	void draw(const World::Camera &camera);
 
 	void setPreload(const World::Camera &camera, float x, float y);
-	bool fire();
+	Shot fire();
 	Bird * setBird(Bird * bird);
 
 	bool isPreloading();
@@ -37,6 +42,8 @@ private:
 
 	const float WIDTH = 10.0f;
 	const float HEIGHT = 100.0f;
+
+	const float MAX_PRELOAD = 50.0f;
 
 	Bird * mBird = nullptr;
 

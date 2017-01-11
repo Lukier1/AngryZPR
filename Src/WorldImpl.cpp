@@ -13,6 +13,7 @@
 #include "../Include/SystemManager.h"
 #include "../Include/Slingshot.h"
 #include "../Include/Bird.h"
+#include "../Include/Block.h"
 namespace AngryZPR {
 
 WorldImpl::WorldImpl() :
@@ -32,6 +33,9 @@ WorldImpl::WorldImpl() :
 
 	//Adding slinghsot to world
 	mObjects.push_back(mSlingshot);
+	mObjects.push_back(Block::create(mWorld, 600.0f, 500.0f));
+	mObjects.push_back(Block::create(mWorld, 600.0f, 450.0f));
+
 }
 
 WorldImpl::~WorldImpl() {
@@ -56,10 +60,10 @@ void WorldImpl::acceptMouseEvent(MouseEvent ev, float x, float y) {
 			mSlingshot->setPreload(mCamera, x, y);
 		break;
 	case MouseEvent::MOUSE_LBUTTON_RELEASE:
-
-		if (mSlingshot->fire()) {
-			Bird * bird = Bird::createBird(mWorld, x,
-					y, 0, 0);
+		Slingshot::Shot shot = mSlingshot->fire();
+		if (shot.done) {
+			Bird * bird = Bird::createBird(mWorld, shot.x,
+					shot.y);
 			mSlingshot->setBird(bird);
 			mObjects.push_back(bird);
 		}
