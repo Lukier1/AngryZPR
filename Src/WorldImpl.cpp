@@ -19,22 +19,33 @@ namespace AngryZPR {
 WorldImpl::WorldImpl() :
 		mGravity(0.0f, -0.001f), mWorld(mGravity), mSlingshot(new Slingshot()) {
 	mWorld.SetAllowSleeping(true);
+
 	std::cout << mWorld.GetGravity().y << std::endl;
 	//Creting physic ground body
 
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(-100.0f, -600.0f);
+	groundBodyDef.position.Set(-10.0f, -60.0f);
 
 	b2PolygonShape groundBox;
-	groundBox.SetAsBox(5000.0f, 100.0f);
+	groundBox.SetAsBox(5000.0f, 10.0f);
 
 	mGroundBody = mWorld.CreateBody(&groundBodyDef);
 	mGroundBody->CreateFixture(&groundBox, 0.0f);
 
 	//Adding slinghsot to world
 	mObjects.push_back(mSlingshot);
-	mObjects.push_back(Block::create(mWorld, 600.0f, 500.0f));
-	mObjects.push_back(Block::create(mWorld, 600.0f, 450.0f));
+	mObjects.push_back(Block::create(mWorld, 600.0f, 500.0f,0));
+	mObjects.push_back(Block::create(mWorld, 640.0f, 500.0f,0));
+	mObjects.push_back(Block::create(mWorld, 650.0f, 500.0f,0));
+	mObjects.push_back(Block::create(mWorld, 690.0f, 500.0f,0));
+	mObjects.push_back(Block::create(mWorld, 625.0f, 380.0f,0));
+	mObjects.push_back(Block::create(mWorld, 665.0f, 380.0f,0));
+
+	mObjects.push_back(Block::create(mWorld, 620.0f, 430.0f, 3.14f/2.0f));
+	mObjects.push_back(Block::create(mWorld, 620.0f, 420.0f, 3.14f/2.0f));
+	mObjects.push_back(Block::create(mWorld, 670.0f, 430.0f, 3.14f/2.0f));
+	mObjects.push_back(Block::create(mWorld, 670.0f, 420.0f, 3.14f/2.0f));
+	mObjects.push_back(Block::create(mWorld, 645.0f, 350.0f, 3.14f/2.0f));
 
 }
 

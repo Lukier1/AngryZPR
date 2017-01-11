@@ -22,7 +22,7 @@ public:
 	virtual ~Block();
 
 	virtual void draw(const World::Camera &camera);
-	static Block * create(b2World &world, float x, float y);
+	static Block * create(b2World &world, float x, float y, float angle);
 };
 
 } /* namespace AngryZPR */

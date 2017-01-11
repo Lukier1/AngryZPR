@@ -24,6 +24,7 @@ Block::~Block() {
 void Block::draw(const World::Camera &camera) {
 	mX = mBody->GetPosition().x/WORLD_SCALE;
 	mY = -mBody->GetPosition().y/WORLD_SCALE-WORLD_SCALE*10;
+
 	float angle = mBody->GetAngle();
 
 	sf::RectangleShape rect(sf::Vector2f(10.0f, 50.0f));
@@ -35,7 +36,7 @@ void Block::draw(const World::Camera &camera) {
 	SystemManager::getSingleton().draw(rect);
 }
 
-Block * Block::create(b2World &world, float x, float y)  {
+Block * Block::create(b2World &world, float x, float y, float angle)  {
 
 	b2FixtureDef fixtureDef;
 	b2PolygonShape dynamicBox;
@@ -43,11 +44,13 @@ Block * Block::create(b2World &world, float x, float y)  {
 
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(x*WORLD_SCALE, -y*WORLD_SCALE);
-
+	bodyDef.angle = angle;
+	bodyDef.linearDamping = 0.0f;
 	dynamicBox.SetAsBox(5.0f,25.0f);
 
 	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
+	fixtureDef.density = 3.0f;
+
 	fixtureDef.friction = 0.8f;
 
 	b2Body * body = world.CreateBody(&bodyDef);
