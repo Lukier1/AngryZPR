@@ -14,38 +14,41 @@
 #include "../Include/Slingshot.h"
 #include "../Include/Bird.h"
 #include "../Include/Block.h"
+#include "../Include/Constants.h"
 namespace AngryZPR {
 
+//1.0m/25px
+
 WorldImpl::WorldImpl() :
-		mGravity(0.0f, -0.001f), mWorld(mGravity), mSlingshot(new Slingshot()) {
+		mGravity(0.0f, 0.1f), mWorld(mGravity), mSlingshot(new Slingshot()) {
 	mWorld.SetAllowSleeping(true);
 
 	std::cout << mWorld.GetGravity().y << std::endl;
 	//Creting physic ground body
 
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(-10.0f, -60.0f);
+	groundBodyDef.position.Set(0.0, 500.0f*WORLD_SCALE);
 
 	b2PolygonShape groundBox;
-	groundBox.SetAsBox(5000.0f, 10.0f);
+	groundBox.SetAsBox(800.0f*WORLD_SCALE, 10.0f*WORLD_SCALE);
 
 	mGroundBody = mWorld.CreateBody(&groundBodyDef);
 	mGroundBody->CreateFixture(&groundBox, 0.0f);
 
 	//Adding slinghsot to world
 	mObjects.push_back(mSlingshot);
-	mObjects.push_back(Block::create(mWorld, 600.0f, 500.0f,0));
-	mObjects.push_back(Block::create(mWorld, 640.0f, 500.0f,0));
-	mObjects.push_back(Block::create(mWorld, 650.0f, 500.0f,0));
+	mObjects.push_back(Block::create(mWorld, 600.0f, 490.0f,0));
+	mObjects.push_back(Block::create(mWorld, 640.0f, 490.0f,0));
+	/*mObjects.push_back(Block::create(mWorld, 650.0f, 500.0f,0));
 	mObjects.push_back(Block::create(mWorld, 690.0f, 500.0f,0));
 	mObjects.push_back(Block::create(mWorld, 625.0f, 380.0f,0));
 	mObjects.push_back(Block::create(mWorld, 665.0f, 380.0f,0));
-
-	mObjects.push_back(Block::create(mWorld, 620.0f, 430.0f, 3.14f/2.0f));
-	mObjects.push_back(Block::create(mWorld, 620.0f, 420.0f, 3.14f/2.0f));
+*/
+	mObjects.push_back(Block::create(mWorld, 620.0f, 455.0f, 3.14f/2.0f));
+/*	mObjects.push_back(Block::create(mWorld, 620.0f, 420.0f, 3.14f/2.0f));
 	mObjects.push_back(Block::create(mWorld, 670.0f, 430.0f, 3.14f/2.0f));
 	mObjects.push_back(Block::create(mWorld, 670.0f, 420.0f, 3.14f/2.0f));
-	mObjects.push_back(Block::create(mWorld, 645.0f, 350.0f, 3.14f/2.0f));
+	mObjects.push_back(Block::create(mWorld, 645.0f, 350.0f, 3.14f/2.0f));*/
 
 }
 
@@ -115,7 +118,7 @@ void WorldImpl::addPhyicObject() {
 void WorldImpl::update(float timeapp) {
 
 	mSlingshot->update(timeapp / 1000.0f);
-	mWorld.Step(timeapp / 1000.0f, VELOCITY_ITERATIONS, POSTION_ITERATIONS);
+	mWorld.Step(timeapp / 40000.0f, VELOCITY_ITERATIONS, POSTION_ITERATIONS);
 }
 
 } /* namespace AngryZPR */

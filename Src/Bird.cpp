@@ -23,12 +23,12 @@ Bird::~Bird() {
 }
 void Bird::draw(const World::Camera &camera) {
 	mX = mBody->GetPosition().x/WORLD_SCALE;
-	mY = -mBody->GetPosition().y/WORLD_SCALE-WORLD_SCALE*10;
+	mY = mBody->GetPosition().y/WORLD_SCALE;
 	float angle = mBody->GetAngle();
 	sf::CircleShape circle(16.0f);
 	sf::RectangleShape rect(sf::Vector2f(10.0f, 10.0f));
 	rect.setFillColor(sf::Color::Yellow);
-	rect.setRotation(angle*180/3.14);
+	rect.setRotation(-angle*180/3.14);
 	rect.setOrigin(sf::Vector2f(5.0f, 5.0f));
 	rect.setPosition(mX, mY);
 	SystemManager::getSingleton().draw(rect);
@@ -41,12 +41,12 @@ Bird * Bird::createBird(b2World &world, float x, float y)  {
 	b2BodyDef bodyDef;
 
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(x*WORLD_SCALE, -y*WORLD_SCALE);
+	bodyDef.position.Set(x*WORLD_SCALE, y*WORLD_SCALE);
 
-	dynamicBox.SetAsBox(5.0f,5.0f);
+	dynamicBox.SetAsBox(5.0f*WORLD_SCALE,5.0f*WORLD_SCALE);
 
 	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
+	fixtureDef.density = 5.0f;
 	fixtureDef.friction = 0.3f;
 
 	b2Body * body = world.CreateBody(&bodyDef);

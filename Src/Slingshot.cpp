@@ -55,9 +55,9 @@ float Slingshot::update(float time) {
 	if(mBird != nullptr)
 	{
 		float angle = atan2(mPreY, -mPreX)*180.0f/3.14f;
-		float speed = (mPreX*mPreX + mPreY*mPreY)/1000.0f;
-		if(forceTime < 100.0f)
-			mBird->applyForce(angle, speed);
+		float speed = sqrt((mPreX*mPreX + mPreY*mPreY))/50.0f;
+		if(mBird->getX() < getX() )
+			mBird->applyForce(angle, speed);// speed);
 		else
 			mBird = nullptr;
 		forceTime += time;
@@ -78,6 +78,10 @@ void Slingshot::setPreload(const World::Camera &camera, float x, float y) {
 	if( mState == STATE::PRELOADING || mState == STATE::IDLE) {
 		float relX = x+camera.X-getX();
 		float relY = y+camera.Y-getY();
+		if(relX > -10)
+			relX = -10;
+		if(relY  < 0 )
+			relY = 0;
 		float sqL = sqrt(relX*relX + relY*relY);
 		if(sqL > MAX_PRELOAD)
 		{

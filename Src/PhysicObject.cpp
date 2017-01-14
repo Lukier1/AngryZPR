@@ -23,7 +23,7 @@ PhysicObject::~PhysicObject() {
 void PhysicObject::applyForce(float angle, float power) {
 	b2Vec2 forceVec;
 	forceVec.x = cos(angle/180*3.14);
-	forceVec.y = sin(angle/180*3.14);
+	forceVec.y = -sin(angle/180*3.14);
 
 	forceVec*=power;
 

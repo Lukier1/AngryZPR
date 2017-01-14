@@ -23,7 +23,7 @@ Block::~Block() {
 }
 void Block::draw(const World::Camera &camera) {
 	mX = mBody->GetPosition().x/WORLD_SCALE;
-	mY = -mBody->GetPosition().y/WORLD_SCALE-WORLD_SCALE*10;
+	mY = mBody->GetPosition().y/WORLD_SCALE;
 
 	float angle = mBody->GetAngle();
 
@@ -43,10 +43,10 @@ Block * Block::create(b2World &world, float x, float y, float angle)  {
 	b2BodyDef bodyDef;
 
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(x*WORLD_SCALE, -y*WORLD_SCALE);
+	bodyDef.position.Set(x*WORLD_SCALE, y*WORLD_SCALE);
 	bodyDef.angle = angle;
 	bodyDef.linearDamping = 0.0f;
-	dynamicBox.SetAsBox(5.0f,25.0f);
+	dynamicBox.SetAsBox(10.0f*WORLD_SCALE/2,50.0f*WORLD_SCALE/2);
 
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 3.0f;
