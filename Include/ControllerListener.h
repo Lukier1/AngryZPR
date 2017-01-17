@@ -25,7 +25,7 @@ namespace AngryZPR {
 		};
 
 
-		virtual void acceptMouseEvent(MouseEvent ev, float x, float y) = 0;
+		virtual void acceptMouseEvent(MouseEvent ev, int x, int y) = 0;
 		virtual void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) = 0;
 	};
 }

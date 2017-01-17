@@ -25,34 +25,21 @@ void Bird::draw(const World::Camera &camera) {
 	mX = mBody->GetPosition().x/WORLD_SCALE;
 	mY = mBody->GetPosition().y/WORLD_SCALE;
 	float angle = mBody->GetAngle();
-	sf::CircleShape circle(16.0f);
+	
 	sf::RectangleShape rect(sf::Vector2f(10.0f, 10.0f));
 	rect.setFillColor(sf::Color::Yellow);
-	rect.setRotation(-angle*180/3.14);
+	rect.setRotation(angle*180.0f/3.14f);
 	rect.setOrigin(sf::Vector2f(5.0f, 5.0f));
 	rect.setPosition(mX, mY);
 	SystemManager::getSingleton().draw(rect);
 }
 
 Bird * Bird::createBird(b2World &world, float x, float y)  {
+	const float DEF_W = 10.0f, DEF_H = 10.0f;
 
-	b2FixtureDef fixtureDef;
-	b2PolygonShape dynamicBox;
-	b2BodyDef bodyDef;
+	b2Body * body = PhysicObject::createBody(world, x, y, 0.0f, 5.0f, 0.0f, 0.0f, 0.3f, DEF_W, DEF_H);
 
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(x*WORLD_SCALE, y*WORLD_SCALE);
-
-	dynamicBox.SetAsBox(5.0f*WORLD_SCALE,5.0f*WORLD_SCALE);
-
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 5.0f;
-	fixtureDef.friction = 0.3f;
-
-	b2Body * body = world.CreateBody(&bodyDef);
-
-	body->CreateFixture(&fixtureDef);
-	body->SetSleepingAllowed(false);
+	//return new Block(body, DEF_W, DEF_H);
 	return new Bird(body);
 }
 
@@ -60,12 +47,5 @@ Bird * Bird::createBird(b2World &world, float x, float y)  {
 Bird * Bird::temp(b2Body * body) {
 	return new Bird(body);
 }
-/*
-b2PolygonShape PhysicObject::getPolygonShape() const {
-	return mPolygonShape;
-}
 
-b2FixtureDef PhysicObject::getFixtureDef() const {
-	return mFixtureDef;
-}*/
 } /* namespace AngryZPR */

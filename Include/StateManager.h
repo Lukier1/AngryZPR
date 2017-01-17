@@ -33,13 +33,15 @@ public:
 	
 	void changeState(GameState state);
 
-	void acceptMouseEvent(MouseEvent ev, float x, float y) { };
+	void acceptMouseEvent(MouseEvent ev, int x, int y) { };
 	void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) { };
 private:
 	GameState mGameState;
 	std::shared_ptr<World> mWorld;
 
 	std::chrono::steady_clock::time_point mLastFrameTime;
+
+	bool mFirstFrame;
 
 
 };

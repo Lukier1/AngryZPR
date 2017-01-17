@@ -28,10 +28,10 @@ public:
 
 	void setPreload(const World::Camera &camera, float x, float y);
 	Shot fire();
-	Bird * setBird(Bird * bird);
+	void setBird(Bird * bird);
 
 	bool isPreloading();
-	float update(float time);
+	WorldObject::OBJECT_EVENT update(float time);
 	bool isOverlapping(const World::Camera &camera, float x, float y);
 private:
 	enum class STATE {
@@ -51,7 +51,7 @@ private:
 
 	float mPreX = 0.0f, mPreY = 0.0f;
 
-	STATE mState;
+	STATE mState = STATE::IDLE;
 };
 
 } /* namespace AngryZPR */

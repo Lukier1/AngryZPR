@@ -12,8 +12,9 @@ public:
 	struct Camera {
 		float X, Y;
 		float W, H;
+		Camera() { X = 0; Y = 0; W = 0; H = 0; }
 	};
-	virtual void acceptMouseEvent(MouseEvent ev, float x, float y) = 0;
+	virtual void acceptMouseEvent(MouseEvent ev, int x, int y) = 0;
 	virtual void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) = 0;
 
 	virtual void draw() = 0;

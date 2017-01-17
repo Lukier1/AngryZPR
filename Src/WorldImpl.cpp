@@ -15,12 +15,14 @@
 #include "../Include/Bird.h"
 #include "../Include/Block.h"
 #include "../Include/Constants.h"
+#include "../Include/Pig.h"
+
 namespace AngryZPR {
 
 //1.0m/25px
 
 WorldImpl::WorldImpl() :
-		mGravity(0.0f, 0.1f), mWorld(mGravity), mSlingshot(new Slingshot()) {
+		mGravity(0.0f, 10.0f), mWorld(mGravity), mSlingshot(new Slingshot()) {
 	mWorld.SetAllowSleeping(true);
 
 	std::cout << mWorld.GetGravity().y << std::endl;
@@ -37,18 +39,21 @@ WorldImpl::WorldImpl() :
 
 	//Adding slinghsot to world
 	mObjects.push_back(mSlingshot);
-	mObjects.push_back(Block::create(mWorld, 600.0f, 490.0f,0));
-	mObjects.push_back(Block::create(mWorld, 640.0f, 490.0f,0));
-	/*mObjects.push_back(Block::create(mWorld, 650.0f, 500.0f,0));
-	mObjects.push_back(Block::create(mWorld, 690.0f, 500.0f,0));
-	mObjects.push_back(Block::create(mWorld, 625.0f, 380.0f,0));
-	mObjects.push_back(Block::create(mWorld, 665.0f, 380.0f,0));
-*/
-	mObjects.push_back(Block::create(mWorld, 620.0f, 455.0f, 3.14f/2.0f));
-/*	mObjects.push_back(Block::create(mWorld, 620.0f, 420.0f, 3.14f/2.0f));
-	mObjects.push_back(Block::create(mWorld, 670.0f, 430.0f, 3.14f/2.0f));
-	mObjects.push_back(Block::create(mWorld, 670.0f, 420.0f, 3.14f/2.0f));
-	mObjects.push_back(Block::create(mWorld, 645.0f, 350.0f, 3.14f/2.0f));*/
+	mObjects.push_back(Block::create(mWorld, 600.0f, 480.0f,0));
+	mObjects.push_back(Block::create(mWorld, 640.0f, 480.0f,0));
+	mObjects.push_back(Block::create(mWorld, 650.0f, 480.0f, 0));
+	mObjects.push_back(Block::create(mWorld, 690.0f, 480.0f, 0));
+	//mObjects.push_back(Block::create(mWorld, 625.0f, 373.0f,0));
+	//mObjects.push_back(Block::create(mWorld, 665.0f, 373.0f,0));
+
+	mObjects.push_back(Block::create(mWorld, 620.0f, 400.0f, 3.14f/2.0f));
+	mObjects.push_back(Block::create(mWorld, 672.0f, 400.0f, 3.14f/2.0f));
+	mObjects.push_back(Block::create(mWorld, 620.0f, 415.0f, 3.14f/2.0f));
+	mObjects.push_back(Block::create(mWorld, 672.0f, 415.0f, 3.14f/2.0f));
+	
+	mObjects.push_back(Pig::create(mWorld, 620.0f, 470.f, 3.14f / 2.0f));
+	mObjects.push_back(Pig::create(mWorld, 672.5f, 470.f, 3.14f / 2.0f));
+	//mObjects.push_back(Block::create(mWorld, 645.0f, 344.0f, 3.14f/2.0f));
 
 }
 
@@ -60,18 +65,17 @@ WorldImpl::~WorldImpl() {
 	mObjects.clear();
 }
 
-void WorldImpl::acceptMouseEvent(MouseEvent ev, float x, float y) {
+void WorldImpl::acceptMouseEvent(MouseEvent ev, int x, int y) {
 
 	switch (ev) {
 	case MouseEvent::MOUSE_LBUTTON_PRESS:
-
-		if (mSlingshot->isOverlapping(mCamera, x, y)) {
-			mSlingshot->setPreload(mCamera, x, y);
+		if (mSlingshot->isOverlapping(mCamera, (float)x, (float)y)) {
+			mSlingshot->setPreload(mCamera, (float)x, (float)y);
 		}
 		break;
 	case MouseEvent::MOUSE_MOVE:
 		if (mSlingshot->isPreloading())
-			mSlingshot->setPreload(mCamera, x, y);
+			mSlingshot->setPreload(mCamera, (float)x, (float)y);
 		break;
 	case MouseEvent::MOUSE_LBUTTON_RELEASE:
 		Slingshot::Shot shot = mSlingshot->fire();
@@ -91,8 +95,6 @@ void WorldImpl::acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) {
 
 void WorldImpl::draw() {
 	//background drawing
-	const int GRASS_WIDE = 150;
-
 	sf::RectangleShape grass(
 			sf::Vector2f(SystemManager::getSingleton().getWindowW(),
 					SystemManager::getSingleton().getWindowH()));
@@ -101,24 +103,31 @@ void WorldImpl::draw() {
 	SystemManager::getSingleton().draw(grass);
 
 	sf::RectangleShape sky(
-			sf::Vector2f(SystemManager::getSingleton().getWindowW(),
-					SystemManager::getSingleton().getWindowH() - GRASS_WIDE));
+			sf::Vector2f((float)SystemManager::getSingleton().getWindowW(),
+			(float)SystemManager::getSingleton().getWindowH() - DRAW_GRASS_WIDE));
 	sky.setFillColor(sf::Color::Blue);
 	SystemManager::getSingleton().draw(sky);
 
+	//Drawing objects on map
 	for (WorldObject * object : mObjects) {
 		object->draw(mCamera);
 	}
 }
 
 void WorldImpl::addPhyicObject() {
-
+	
 }
 
 void WorldImpl::update(float timeapp) {
-
-	mSlingshot->update(timeapp / 1000.0f);
-	mWorld.Step(timeapp / 40000.0f, VELOCITY_ITERATIONS, POSTION_ITERATIONS);
+	//std::cout << "timeapp" << timeapp << std::endl;
+	for (WorldObject * object : mObjects) {
+		WorldObject::OBJECT_EVENT ev = object->update(timeapp);
+		if (ev != WorldObject::OBJECT_EVENT::NONE)
+		{
+			processEvent(object, ev);
+		}
+	}
+	mWorld.Step(timeapp, VELOCITY_ITERATIONS, POSTION_ITERATIONS);
 }
 
 } /* namespace AngryZPR */

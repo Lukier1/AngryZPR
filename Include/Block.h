@@ -14,10 +14,10 @@ namespace AngryZPR {
 
 class Block : public PhysicObject {
 private:
-	Block(b2Body * body);
+	Block(b2Body * body, float mBlockW, float mBlockH);
 
 protected:
-
+	float mBlockW, mBlockH;
 public:
 	virtual ~Block();
 

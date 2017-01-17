@@ -25,8 +25,6 @@ bool Root::run() {
 	mStateManager.draw();
 	sysMgr.endDraw();
 
-
-
 	return sysMgr.isOpen();
 }
 

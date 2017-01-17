@@ -25,7 +25,7 @@ private:
 	SystemManager();
 	std::vector<std::shared_ptr<ControllerListener>> mContListeners;
 	
-	void updateMouseEvent(ControllerListener::MouseEvent ev, float x, float y);
+	void updateMouseEvent(ControllerListener::MouseEvent ev, int x, int y);
 	void updateKeyEvent(ControllerListener::KeyEvent ev, sf::Keyboard::Key key);
 
 public:

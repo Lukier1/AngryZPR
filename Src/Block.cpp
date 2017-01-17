@@ -13,9 +13,9 @@
 #include "../Include/Constants.h"
 namespace AngryZPR {
 
-Block::Block(b2Body * _body)  : PhysicObject(_body) {
-	// TODO Auto-generated constructor stub
-
+	Block::Block(b2Body * _body, float blockW, float blockH) : PhysicObject(_body) {
+		mBlockH = blockH;
+		mBlockW = blockW;
 }
 
 Block::~Block() {
@@ -27,10 +27,10 @@ void Block::draw(const World::Camera &camera) {
 
 	float angle = mBody->GetAngle();
 
-	sf::RectangleShape rect(sf::Vector2f(10.0f, 50.0f));
-	rect.setRotation(-angle*180/3.14);
+	sf::RectangleShape rect(sf::Vector2f(mBlockW, mBlockH));
+	rect.setRotation((float)(angle*180.0f/3.14f));
 	rect.setFillColor(sf::Color::Black);
-	rect.setOrigin(sf::Vector2f(5.0f, 25.0f));
+	rect.setOrigin(sf::Vector2f(mBlockW/2.0f, mBlockH/2.0f));
 	rect.setPosition(mX, mY);
 
 	SystemManager::getSingleton().draw(rect);
@@ -38,26 +38,11 @@ void Block::draw(const World::Camera &camera) {
 
 Block * Block::create(b2World &world, float x, float y, float angle)  {
 
-	b2FixtureDef fixtureDef;
-	b2PolygonShape dynamicBox;
-	b2BodyDef bodyDef;
+	const float DEF_W = 10.0f, DEF_H = 50.0f;
 
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(x*WORLD_SCALE, y*WORLD_SCALE);
-	bodyDef.angle = angle;
-	bodyDef.linearDamping = 0.0f;
-	dynamicBox.SetAsBox(10.0f*WORLD_SCALE/2,50.0f*WORLD_SCALE/2);
+	b2Body * body = PhysicObject::createBody(world, x, y, angle, 6.0f, 0.0f, 0.0f, 0.8f, DEF_W, DEF_H);
 
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 3.0f;
-
-	fixtureDef.friction = 0.8f;
-
-	b2Body * body = world.CreateBody(&bodyDef);
-
-	body->CreateFixture(&fixtureDef);
-
-	return new Block(body);
+	return new Block(body, DEF_W, DEF_H);
 }
 
 

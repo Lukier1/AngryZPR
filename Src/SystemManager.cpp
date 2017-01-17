@@ -53,7 +53,7 @@ void SystemManager::eventPoll() {
 			case sf::Event::EventType::MouseButtonPressed:
 					if(event.mouseButton.button == sf::Mouse::Button::Left)
 						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_LBUTTON_PRESS, event.mouseButton.x, event.mouseButton.y);
-					if(event.mouseButton.button == sf::Mouse::Button::Right)
+					if (event.mouseButton.button == sf::Mouse::Button::Right) 
 						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_RBUTTON_PRESS, event.mouseButton.x, event.mouseButton.y);
 
 			break;
@@ -118,7 +118,7 @@ void SystemManager::deregisterListener(std::shared_ptr<ControllerListener> liste
 	}
 }
 
-void AngryZPR::SystemManager::updateMouseEvent(ControllerListener::MouseEvent ev, float x, float y) {
+void AngryZPR::SystemManager::updateMouseEvent(ControllerListener::MouseEvent ev, int x, int y) {
 	for(auto list : mContListeners)
 	{
 		list->acceptMouseEvent(ev, x, y);

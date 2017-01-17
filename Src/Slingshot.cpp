@@ -26,7 +26,7 @@ void Slingshot::draw(const World::Camera &camera) {
 	if(mState == STATE::PRELOADING)
 	{
 		float speed = (mPreX*mPreX + mPreY*mPreY)/1000.0f;
-		float angle = atan2(-mPreY, -mPreX)*180.0f/3.14f; // TODO: Przeniesc to do jednej funkcji
+		float angle = atan2(-mPreY, -mPreX)*180.0f/3.14f; //TODO: Przeniesc to do jednej funkcji
 
 		sf::RectangleShape line(sf::Vector2f(speed*50.0f, 2));
 
@@ -41,7 +41,7 @@ void Slingshot::draw(const World::Camera &camera) {
 	SystemManager::getSingleton().draw(shape);
 }
 
-Bird* Slingshot::setBird(Bird* bird) {
+void Slingshot::setBird(Bird* bird) {
 	if(mBird == nullptr)
 	{
 		forceTime = 0.0f;
@@ -49,19 +49,20 @@ Bird* Slingshot::setBird(Bird* bird) {
 	}
 }
 
-float Slingshot::update(float time) {
+WorldObject::OBJECT_EVENT Slingshot::update(float time) {
 
 
 	if(mBird != nullptr)
 	{
 		float angle = atan2(mPreY, -mPreX)*180.0f/3.14f;
-		float speed = sqrt((mPreX*mPreX + mPreY*mPreY))/50.0f;
-		if(mBird->getX() < getX() )
+		float speed = sqrt((mPreX*mPreX + mPreY*mPreY))*2.0;
+		if(mBird->getX() < getX())
 			mBird->applyForce(angle, speed);// speed);
 		else
 			mBird = nullptr;
 		forceTime += time;
 	}
+	return OBJECT_EVENT::NONE;
 }
 
 bool Slingshot::isOverlapping(const World::Camera &camera, float x, float y)

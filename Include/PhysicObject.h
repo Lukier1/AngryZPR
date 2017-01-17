@@ -16,6 +16,7 @@ namespace AngryZPR {
 class PhysicObject: public WorldObject {
 protected:
 	b2Body * mBody;
+	static b2Body * createBody(b2World &world, float x, float y, float angle, float density, float linearDamping, float angularDamping, float friction, float w, float h);
 public:
 	PhysicObject(b2Body * body);
 	virtual ~PhysicObject();

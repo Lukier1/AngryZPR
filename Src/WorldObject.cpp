@@ -15,5 +15,8 @@ namespace AngryZPR {
 		float WorldObject::getY() const {
 			return mY;
 		}
+		WorldObject::OBJECT_EVENT WorldObject::update(float time) {
+			return OBJECT_EVENT::NONE;
+		}
 }
 

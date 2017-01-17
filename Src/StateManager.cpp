@@ -13,7 +13,7 @@
 #include <SFML/Graphics.hpp>
 namespace AngryZPR {
 
-StateManager::StateManager()  : mGameState(GameState::DESTROY), mWorld(new WorldImpl()) {
+StateManager::StateManager()  : mGameState(GameState::DESTROY), mWorld(new WorldImpl()), mFirstFrame(true) {
 	changeState(mGameState);
 
 	mLastFrameTime = std::chrono::steady_clock::now();
@@ -38,9 +38,16 @@ void StateManager::draw() {
 }
 
 void StateManager::update() {
+	
 	std::chrono::steady_clock::time_point actualTime = std::chrono::steady_clock::now();
-	int durationInMs = std::chrono::duration_cast<std::chrono::microseconds>(actualTime - mLastFrameTime).count();
-	float durationInSec = (float)durationInMs/1.0f;
+	int durationInMs = (int)std::chrono::duration_cast<std::chrono::milliseconds>(actualTime - mLastFrameTime).count();
+	float durationInSec = 0.0f;
+	if (mFirstFrame) {
+		durationInSec = 0.0f;
+		mFirstFrame = false;
+	}
+	else
+		durationInSec = (float)durationInMs / 1000.0f;
 	mLastFrameTime = actualTime;
 	switch(mGameState)
 	{

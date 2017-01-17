@@ -29,11 +29,17 @@ namespace AngryZPR {
 
 		const int32 VELOCITY_ITERATIONS = 6;
 		const int32 POSTION_ITERATIONS = 2;
+
+		const int DRAW_GRASS_WIDE = 150;
+
+		void processEvent(WorldObject * object, WorldObject::OBJECT_EVENT objEvent);
+
+		void deleteObject(WorldObject * object);
 	public:
 		WorldImpl();
 		virtual ~WorldImpl();
 
-		void acceptMouseEvent(MouseEvent ev, float x, float y);
+		void acceptMouseEvent(MouseEvent ev, int x, int y);
 		void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key);
 
 		void draw();
