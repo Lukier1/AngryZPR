@@ -2,7 +2,7 @@
  * WorldObject.cpp
  *
  *  Created on: Dec 14, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
 #include "../Include/WorldObject.h"
@@ -15,8 +15,8 @@ namespace AngryZPR {
 		float WorldObject::getY() const {
 			return mY;
 		}
-		WorldObject::OBJECT_EVENT WorldObject::update(float time) {
-			return OBJECT_EVENT::NONE;
+		WorldObject::ObjectEvent WorldObject::update(float time) {
+			return ObjectEvent::NONE;
 		}
 }
 

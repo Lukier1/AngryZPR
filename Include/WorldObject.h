@@ -8,17 +8,19 @@ namespace AngryZPR {
 	protected:
 		float mX, mY;
 	public:
-		enum class OBJECT_EVENT{
+		enum class ObjectEvent {
 			DESTROY_ITSELF_ADDPOINT,
 			DESTROY_ITSELF,
 			NONE
 		};
 
 		virtual void draw(const World::Camera &camera) = 0;
-		virtual OBJECT_EVENT update(float time);
+		virtual ObjectEvent update(float time);
 		float getX() const;
 
 		float getY() const;
+
+		virtual ~WorldObject() {} 
 	};
 }
 

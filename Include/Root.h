@@ -2,7 +2,7 @@
  * Root.h
  *
  *  Created on: Dec 4, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
 #ifndef INCLUDE_ROOT_H_

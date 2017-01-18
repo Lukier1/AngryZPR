@@ -2,7 +2,7 @@
  * WorldImpl.h
  *
  *  Created on: Dec 14, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
 #ifndef INCLUDE_WORLDIMPL_H_
@@ -27,12 +27,8 @@ namespace AngryZPR {
 		b2Body * mGroundBody;
 		Slingshot * mSlingshot;
 
-		const int32 VELOCITY_ITERATIONS = 6;
-		const int32 POSTION_ITERATIONS = 2;
 
-		const int DRAW_GRASS_WIDE = 150;
-
-		void processEvent(WorldObject * object, WorldObject::OBJECT_EVENT objEvent);
+		void processEvent(WorldObject * object, WorldObject::ObjectEvent obj_event);
 
 		void deleteObject(WorldObject * object);
 	public:
@@ -44,8 +40,6 @@ namespace AngryZPR {
 
 		void draw();
 		void update(float time);
-
-		void addPhyicObject();
 	};
 
 } /* namespace AngryZPR */

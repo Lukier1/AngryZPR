@@ -2,7 +2,7 @@
  * Slingshot.h
  *
  *  Created on: Jan 10, 2017
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
 #ifndef INCLUDE_SLINGSHOT_H_
@@ -22,7 +22,6 @@ public:
 	};
 
 	Slingshot();
-	virtual ~Slingshot();
 
 	void draw(const World::Camera &camera);
 
@@ -31,10 +30,10 @@ public:
 	void setBird(Bird * bird);
 
 	bool isPreloading();
-	WorldObject::OBJECT_EVENT update(float time);
+	WorldObject::ObjectEvent update(float time);
 	bool isOverlapping(const World::Camera &camera, float x, float y);
 private:
-	enum class STATE {
+	enum class State {
 		IDLE,
 		PRELOADING,
 		SHOOTING
@@ -51,7 +50,11 @@ private:
 
 	float mPreX = 0.0f, mPreY = 0.0f;
 
-	STATE mState = STATE::IDLE;
+	State mState = State::IDLE;
+
+	float getAngle() const;
+
+	float getLengthVelocity() const;
 };
 
 } /* namespace AngryZPR */

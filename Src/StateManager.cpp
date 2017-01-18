@@ -2,7 +2,7 @@
  * StatateManager.cpp
  *
  *  Created on: Dec 7, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
 #include "../Include/StateManager.h"
@@ -21,7 +21,6 @@ StateManager::StateManager()  : mGameState(GameState::DESTROY), mWorld(new World
 }
 
 StateManager::~StateManager() {
-	// TODO Auto-generated destructor stub
 }
 
 void StateManager::draw() {

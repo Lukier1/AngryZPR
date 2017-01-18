@@ -2,7 +2,7 @@
 * Pig.cpp
 *
 *  Created on: Jan 10, 2017
-*      Author: lukier
+*      Author: £ukasz Kowalczyk
 */
 #include <iostream>
 
@@ -13,13 +13,13 @@
 #include "../Include/Constants.h"
 namespace AngryZPR {
 
-	Pig::Pig(b2Body * _body, float PigW, float PigH) : PhysicObject(_body) {
-		mPigH = PigH;
-		mPigW = PigW;
+	Pig::Pig(b2Body * _body, float pig_w, float pig_h) : PhysicObject(_body) {
+		mPigH = pig_h;
+		mPigW = pig_w;
 	}
 
 	Pig::~Pig() {
-		// TODO Auto-generated destructor stub
+		
 	}
 	void Pig::draw(const World::Camera &camera) {
 		mX = mBody->GetPosition().x / WORLD_SCALE;
@@ -29,7 +29,7 @@ namespace AngryZPR {
 
 		sf::RectangleShape rect(sf::Vector2f(mPigW, mPigH));
 		rect.setRotation((float)(angle*180.0f / 3.14f));
-		rect.setFillColor(sf::Color(242,157,244));
+		rect.setFillColor(sf::Color(242,157,244)); // Pink color
 		rect.setOrigin(sf::Vector2f(mPigW / 2.0f, mPigH / 2.0f));
 		rect.setPosition(mX, mY);
 

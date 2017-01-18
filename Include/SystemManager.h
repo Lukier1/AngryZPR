@@ -2,7 +2,7 @@
  * SystemManager.h
  *
  *  Created on: Dec 6, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
 #ifndef INCLUDE_SYSTEMMANAGER_H_
@@ -30,7 +30,6 @@ private:
 
 public:
 	static SystemManager& getSingleton();
-	virtual ~SystemManager();
 	
 	void setWindow(unsigned short w, unsigned short h);
 	unsigned short getWindowH() const;
@@ -40,7 +39,7 @@ public:
 
 	void beginDraw();
 	void endDraw();
-	void draw(const sf::Drawable& drawable, const sf::RenderStates& renderStates=sf::RenderStates::Default);
+	void draw(const sf::Drawable& drawable, const sf::RenderStates& render_states=sf::RenderStates::Default);
 
 	bool isOpen() const;
 

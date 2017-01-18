@@ -1,8 +1,8 @@
 /*
-* Block.h
+* Pig.h
 *
 *  Created on: Jan 10, 2017
-*      Author: lukier
+*      Author: £ukasz Kowalczyk
 */
 
 #ifndef INCLUDE_PIG_H_
@@ -14,7 +14,7 @@ namespace AngryZPR {
 
 	class Pig : public PhysicObject {
 	private:
-		Pig(b2Body * body, float mPigW, float mPigH);
+		Pig(b2Body * body, float pig_w, float pig_h);
 
 	protected:
 		float mPigW, mPigH;

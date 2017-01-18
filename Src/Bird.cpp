@@ -2,7 +2,7 @@
  * Bird.cpp
  *
  *  Created on: Jan 10, 2017
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 #include <iostream>
 
@@ -13,14 +13,9 @@
 #include "../Include/Constants.h"
 namespace AngryZPR {
 
-Bird::Bird(b2Body * _body)  : PhysicObject(_body) {
-	// TODO Auto-generated constructor stub
-
+Bird::Bird(b2Body * _body) : PhysicObject(_body), mTimeNoSpeed(0) {
 }
 
-Bird::~Bird() {
-	// TODO Auto-generated destructor stub
-}
 void Bird::draw(const World::Camera &camera) {
 	mX = mBody->GetPosition().x/WORLD_SCALE;
 	mY = mBody->GetPosition().y/WORLD_SCALE;
@@ -44,8 +39,15 @@ Bird * Bird::createBird(b2World &world, float x, float y)  {
 }
 
 
-Bird * Bird::temp(b2Body * body) {
-	return new Bird(body);
+WorldObject::ObjectEvent Bird::update(float time) {
+	
+	if (mBody->GetLinearVelocity().Length() < 0.1f)
+		mTimeNoSpeed += time;
+	else
+		mTimeNoSpeed = 0;
+	if (mTimeNoSpeed > 0.5f)
+		return WorldObject::ObjectEvent::DESTROY_ITSELF;
+	return WorldObject::ObjectEvent::NONE;
 }
 
 } /* namespace AngryZPR */

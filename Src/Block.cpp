@@ -2,7 +2,7 @@
  * Block.cpp
  *
  *  Created on: Jan 10, 2017
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 #include <iostream>
 
@@ -13,14 +13,11 @@
 #include "../Include/Constants.h"
 namespace AngryZPR {
 
-	Block::Block(b2Body * _body, float blockW, float blockH) : PhysicObject(_body) {
-		mBlockH = blockH;
-		mBlockW = blockW;
+Block::Block(b2Body * _body, float block_w, float block_h) : PhysicObject(_body) {
+	mBlockH = block_h;
+	mBlockW = block_w;
 }
 
-Block::~Block() {
-	// TODO Auto-generated destructor stub
-}
 void Block::draw(const World::Camera &camera) {
 	mX = mBody->GetPosition().x/WORLD_SCALE;
 	mY = mBody->GetPosition().y/WORLD_SCALE;

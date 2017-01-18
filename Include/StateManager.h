@@ -2,11 +2,11 @@
  * StatateManager.h
  *
  *  Created on: Dec 7, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
-#ifndef STATEMANAGER_H_
-#define STATEMANAGER_H_
+#ifndef StateMANAGER_H_
+#define StateMANAGER_H_
 
 #include <memory>
 #include <chrono>
@@ -48,4 +48,4 @@ private:
 
 } /* namespace AngryZPR */
 
-#endif /* STATEMANAGER_H_ */
+#endif /* StateMANAGER_H_ */

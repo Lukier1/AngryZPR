@@ -2,7 +2,7 @@
  * PhysicObject.cpp
  *
  *  Created on: Dec 14, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
 #include "../Include/PhysicObject.h"
@@ -11,9 +11,6 @@ namespace AngryZPR {
 
 PhysicObject::PhysicObject(b2Body * body) : mBody(body) {
 	mBody->SetSleepingAllowed(false);
-	//Body->SetAwake(false);
-	// TODO Auto-generated constructor stub
-
 }
 
 PhysicObject::~PhysicObject() {
@@ -31,17 +28,19 @@ void PhysicObject::applyForce(float angle, float power) {
 
 }
 
-b2Body * PhysicObject::createBody(b2World &world, float x, float y, float angle, float density, float linearDamping, float angularDamping, float friction, float w, float h) {
+b2Body * PhysicObject::createBody(b2World &world, float x, float y, float angle, float density, float linear_damping, float angular_damping, float friction, float w, float h) {
 	b2FixtureDef fixtureDef;
 	b2PolygonShape dynamicBox;
 	b2BodyDef bodyDef;
 
+	const float BOX2D_REDUCTOR = 2.0f;
+
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(x*WORLD_SCALE, y*WORLD_SCALE);
 	bodyDef.angle = angle;
-	bodyDef.linearDamping = linearDamping;
-	bodyDef.angularDamping = angularDamping;
-	dynamicBox.SetAsBox(w*WORLD_SCALE/2.0f, h*WORLD_SCALE/2.0f);
+	bodyDef.linearDamping = linear_damping;
+	bodyDef.angularDamping = angular_damping;
+	dynamicBox.SetAsBox(w*WORLD_SCALE / BOX2D_REDUCTOR, h*WORLD_SCALE / BOX2D_REDUCTOR);
 
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = density;

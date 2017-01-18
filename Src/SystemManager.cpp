@@ -2,7 +2,7 @@
  * SystemManager.cpp
  *
  *  Created on: Dec 6, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 
 #include <iostream>
@@ -12,7 +12,6 @@
 using namespace sf;
 using namespace AngryZPR;
 SystemManager::SystemManager() : mWindowH(600), mWindowW(800), mWindow(new RenderWindow(VideoMode(mWindowW, mWindowH,32),"AngryZPR")){
-	// TODO Auto-generated constructor stub
 
 }
 
@@ -21,10 +20,6 @@ SystemManager& SystemManager::getSingleton(){
 	return sysMgr;
 }
 
-SystemManager::~SystemManager() {
-	// TODO Auto-generated destructor stub
-	std::cout << "SystemManager destroyed" << std::endl;
-}
 
 void SystemManager::setWindow(unsigned short w, unsigned short h) {
 	mWindow->setSize(sf::Vector2u(w,h));
@@ -79,8 +74,8 @@ void SystemManager::beginDraw()
 void SystemManager::endDraw() {
 	mWindow->display();
 }
-void SystemManager::draw(const Drawable& drawable, const RenderStates& renderStates) {
-	mWindow->draw(drawable, renderStates);
+void SystemManager::draw(const Drawable& drawable, const RenderStates& render_states) {
+	mWindow->draw(drawable, render_states);
 }
 
 

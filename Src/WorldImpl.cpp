@@ -2,7 +2,7 @@
  * WorldImpl.cpp
  *
  *  Created on: Dec 14, 2016
- *      Author: lukier
+ *      Author: £ukasz Kowalczyk
  */
 #include <iostream>
 
@@ -25,36 +25,38 @@ WorldImpl::WorldImpl() :
 		mGravity(0.0f, 10.0f), mWorld(mGravity), mSlingshot(new Slingshot()) {
 	mWorld.SetAllowSleeping(true);
 
-	std::cout << mWorld.GetGravity().y << std::endl;
+	const int SCREEN_W = SystemManager::getSingleton().getWindowW();
+	const int SCREEN_H = SystemManager::getSingleton().getWindowH();
+	const int GROUND_Y = SCREEN_H - 100;
+	const int GROUND_X = 0;
+	const int GROUND_H = 10;
 	//Creting physic ground body
 
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0, 500.0f*WORLD_SCALE);
+	groundBodyDef.position.Set((float32)GROUND_X, GROUND_Y*WORLD_SCALE);
 
 	b2PolygonShape groundBox;
-	groundBox.SetAsBox(800.0f*WORLD_SCALE, 10.0f*WORLD_SCALE);
+	groundBox.SetAsBox(SCREEN_W*WORLD_SCALE, GROUND_H*WORLD_SCALE);
 
 	mGroundBody = mWorld.CreateBody(&groundBodyDef);
 	mGroundBody->CreateFixture(&groundBox, 0.0f);
 
 	//Adding slinghsot to world
 	mObjects.push_back(mSlingshot);
+
+	//Creating map
 	mObjects.push_back(Block::create(mWorld, 600.0f, 480.0f,0));
 	mObjects.push_back(Block::create(mWorld, 640.0f, 480.0f,0));
 	mObjects.push_back(Block::create(mWorld, 650.0f, 480.0f, 0));
 	mObjects.push_back(Block::create(mWorld, 690.0f, 480.0f, 0));
-	//mObjects.push_back(Block::create(mWorld, 625.0f, 373.0f,0));
-	//mObjects.push_back(Block::create(mWorld, 665.0f, 373.0f,0));
+
 
 	mObjects.push_back(Block::create(mWorld, 620.0f, 400.0f, 3.14f/2.0f));
 	mObjects.push_back(Block::create(mWorld, 672.0f, 400.0f, 3.14f/2.0f));
-	mObjects.push_back(Block::create(mWorld, 620.0f, 415.0f, 3.14f/2.0f));
-	mObjects.push_back(Block::create(mWorld, 672.0f, 415.0f, 3.14f/2.0f));
 	
-	mObjects.push_back(Pig::create(mWorld, 620.0f, 470.f, 3.14f / 2.0f));
-	mObjects.push_back(Pig::create(mWorld, 672.5f, 470.f, 3.14f / 2.0f));
-	//mObjects.push_back(Block::create(mWorld, 645.0f, 344.0f, 3.14f/2.0f));
-
+	
+	mObjects.push_back(Pig::create(mWorld, 620.0f, 390.f, 3.14f / 2.0f));
+	mObjects.push_back(Pig::create(mWorld, 672.5f, 390.f, 3.14f / 2.0f));
 }
 
 WorldImpl::~WorldImpl() {
@@ -94,6 +96,8 @@ void WorldImpl::acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) {
 }
 
 void WorldImpl::draw() {
+	const int DRAW_GRASS_WIDE = 150;
+
 	//background drawing
 	sf::RectangleShape grass(
 			sf::Vector2f(SystemManager::getSingleton().getWindowW(),
@@ -114,15 +118,16 @@ void WorldImpl::draw() {
 	}
 }
 
-void WorldImpl::addPhyicObject() {
-	
-}
 
 void WorldImpl::update(float timeapp) {
-	//std::cout << "timeapp" << timeapp << std::endl;
-	for (WorldObject * object : mObjects) {
-		WorldObject::OBJECT_EVENT ev = object->update(timeapp);
-		if (ev != WorldObject::OBJECT_EVENT::NONE)
+	const int32 VELOCITY_ITERATIONS = 6;
+	const int32 POSTION_ITERATIONS = 2;
+
+	std::vector<WorldObject*> safeCopy(mObjects.size());
+	std::copy(mObjects.begin(), mObjects.end(), safeCopy.begin());
+	for (WorldObject * object : safeCopy) {
+		WorldObject::ObjectEvent ev = object->update(timeapp);
+		if (ev != WorldObject::ObjectEvent::NONE)
 		{
 			processEvent(object, ev);
 		}
@@ -130,4 +135,30 @@ void WorldImpl::update(float timeapp) {
 	mWorld.Step(timeapp, VELOCITY_ITERATIONS, POSTION_ITERATIONS);
 }
 
+void WorldImpl::processEvent(WorldObject * object, WorldObject::ObjectEvent obj_event) {
+	switch (obj_event)
+	{
+	case WorldObject::ObjectEvent::DESTROY_ITSELF:
+		deleteObject(object);
+		break;
+	case WorldObject::ObjectEvent::DESTROY_ITSELF_ADDPOINT:
+		deleteObject(object);
+		break;
+	default:
+		break;
+	}
+}
+
+void WorldImpl::deleteObject(WorldObject * obj)
+{
+	for (int i = 0; i < mObjects.size(); ++i)
+	{
+		if (mObjects[i] == obj)
+		{
+			delete mObjects[i];
+			mObjects.erase(mObjects.begin()+i);
+			break;
+		}
+	}
+}
 } /* namespace AngryZPR */
