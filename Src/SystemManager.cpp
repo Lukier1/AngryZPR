@@ -2,7 +2,7 @@
  * SystemManager.cpp
  *
  *  Created on: Dec 6, 2016
- *      Author: £ukasz Kowalczyk
+ *      Author: ï¿½ukasz Kowalczyk
  */
 
 #include <iostream>
@@ -20,13 +20,6 @@ SystemManager& SystemManager::getSingleton(){
 	return sysMgr;
 }
 
-
-void SystemManager::setWindow(unsigned short w, unsigned short h) {
-	mWindow->setSize(sf::Vector2u(w,h));
-	mWindowW  = w;
-	mWindowH = h;
-}
-
 unsigned short SystemManager::getWindowH() const {
 	return mWindowH;
 }
@@ -41,25 +34,29 @@ void SystemManager::eventPoll() {
 	{
 		if (event.type == sf::Event::Closed)
 			mWindow->close();
-		switch (event.type) {
-			case sf::Event::EventType::MouseMoved:
+
+		switch (event.type+1) { // WartoÅ›c zwieszkona o jeden w zwiazku z bugiem w SFML
+			case (sf::Event::MouseMoved):
 				updateMouseEvent(ControllerListener::MouseEvent::MOUSE_MOVE, event.mouseMove.x, event.mouseMove.y);
+
 				break;
-			case sf::Event::EventType::MouseButtonPressed:
+			case (sf::Event::MouseButtonReleased):
+
+						if(event.mouseButton.button == sf::Mouse::Button::Left) {
+							updateMouseEvent(ControllerListener::MouseEvent::MOUSE_LBUTTON_RELEASE, event.mouseButton.x, event.mouseButton.y);
+						}
+						if(event.mouseButton.button == sf::Mouse::Button::Right)
+							updateMouseEvent(ControllerListener::MouseEvent::MOUSE_RBUTTON_RELEASE, event.mouseButton.x, event.mouseButton.y);
+
+			break;
+			case sf::Event::MouseButtonPressed:
 					if(event.mouseButton.button == sf::Mouse::Button::Left)
 						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_LBUTTON_PRESS, event.mouseButton.x, event.mouseButton.y);
 					if (event.mouseButton.button == sf::Mouse::Button::Right) 
 						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_RBUTTON_PRESS, event.mouseButton.x, event.mouseButton.y);
 
 			break;
-			case sf::Event::EventType::MouseButtonReleased:
 
-					if(event.mouseButton.button == sf::Mouse::Button::Left)
-						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_LBUTTON_RELEASE, event.mouseButton.x, event.mouseButton.y);
-					if(event.mouseButton.button == sf::Mouse::Button::Right)
-						updateMouseEvent(ControllerListener::MouseEvent::MOUSE_RBUTTON_RELEASE, event.mouseButton.x, event.mouseButton.y);
-
-			break;
 			default:
 				break;
 		}

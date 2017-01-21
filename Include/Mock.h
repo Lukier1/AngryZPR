@@ -4,7 +4,9 @@
 #include <string>
 
 namespace AngryZPR {
-
+/*
+ * Rodzic dla wszystkich obiektów które sa mocjowane dla testów jednostkowych
+ */
 	class Mock {
 	private:
 		std::map<std::string, int> mExecuteNum;

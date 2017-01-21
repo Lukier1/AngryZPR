@@ -2,7 +2,7 @@
 * Pig.cpp
 *
 *  Created on: Jan 10, 2017
-*      Author: £ukasz Kowalczyk
+*      Author: ï¿½ukasz Kowalczyk
 */
 #include <iostream>
 
@@ -18,12 +18,8 @@ namespace AngryZPR {
 		mPigW = pig_w;
 	}
 
-	Pig::~Pig() {
-		
-	}
-	void Pig::draw(const World::Camera &camera) {
-		mX = mBody->GetPosition().x / WORLD_SCALE;
-		mY = mBody->GetPosition().y / WORLD_SCALE;
+	void Pig::draw(const World::Camera &camera) const {
+
 
 		float angle = mBody->GetAngle();
 
@@ -44,6 +40,5 @@ namespace AngryZPR {
 		return new Pig(body, DEF_W, DEF_H);
 		
 	}
-
 
 } /* namespace AngryZPR */

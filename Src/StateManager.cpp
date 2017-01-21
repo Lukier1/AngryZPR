@@ -2,7 +2,7 @@
  * StatateManager.cpp
  *
  *  Created on: Dec 7, 2016
- *      Author: £ukasz Kowalczyk
+ *      Author: ï¿½ukasz Kowalczyk
  */
 
 #include "../Include/StateManager.h"
@@ -15,20 +15,15 @@ namespace AngryZPR {
 
 StateManager::StateManager()  : mGameState(GameState::DESTROY), mWorld(new WorldImpl()), mFirstFrame(true) {
 	changeState(mGameState);
-
 	mLastFrameTime = std::chrono::steady_clock::now();
-	// TODO Auto-generated constructor stub
 }
 
-StateManager::~StateManager() {
-}
+
 
 void StateManager::draw() {
-	sf::RectangleShape shape(sf::Vector2f(100, 100));
 	switch(mGameState)
 	{
 	case GameState::BUILD:
-
 		break;
 	case GameState::DESTROY:
 		mWorld->draw();
@@ -39,14 +34,14 @@ void StateManager::draw() {
 void StateManager::update() {
 	
 	std::chrono::steady_clock::time_point actualTime = std::chrono::steady_clock::now();
-	int durationInMs = (int)std::chrono::duration_cast<std::chrono::milliseconds>(actualTime - mLastFrameTime).count();
+	int durationInMs = (int)std::chrono::duration_cast<std::chrono::microseconds>(actualTime - mLastFrameTime).count();
 	float durationInSec = 0.0f;
 	if (mFirstFrame) {
 		durationInSec = 0.0f;
 		mFirstFrame = false;
 	}
 	else
-		durationInSec = (float)durationInMs / 1000.0f;
+		durationInSec = (float)durationInMs / 1000000.0f;
 	mLastFrameTime = actualTime;
 	switch(mGameState)
 	{

@@ -2,7 +2,7 @@
  * Block.cpp
  *
  *  Created on: Jan 10, 2017
- *      Author: £ukasz Kowalczyk
+ *      Author: ï¿½ukasz Kowalczyk
  */
 #include <iostream>
 
@@ -13,14 +13,16 @@
 #include "../Include/Constants.h"
 namespace AngryZPR {
 
+/*
+ *
+ */
+
 Block::Block(b2Body * _body, float block_w, float block_h) : PhysicObject(_body) {
 	mBlockH = block_h;
 	mBlockW = block_w;
 }
 
-void Block::draw(const World::Camera &camera) {
-	mX = mBody->GetPosition().x/WORLD_SCALE;
-	mY = mBody->GetPosition().y/WORLD_SCALE;
+void Block::draw(const World::Camera &camera) const {
 
 	float angle = mBody->GetAngle();
 
@@ -41,6 +43,7 @@ Block * Block::create(b2World &world, float x, float y, float angle)  {
 
 	return new Block(body, DEF_W, DEF_H);
 }
+
 
 
 } /* namespace AngryZPR */

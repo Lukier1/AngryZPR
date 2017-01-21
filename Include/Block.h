@@ -2,7 +2,7 @@
  * Block.h
  *
  *  Created on: Jan 10, 2017
- *      Author: �ukasz Kowalczyk
+ *      Author: �ukasz Kowalczyk
  */
 
 #ifndef INCLUDE_BLOCK_H_
@@ -12,6 +12,10 @@
 
 namespace AngryZPR {
 
+/*
+ * Klasa opisująca obiekty bloków które są umieszczane na mapie
+ *
+ */
 class Block : public PhysicObject {
 private:
 	Block(b2Body * body, float block_w, float block_h);
@@ -19,7 +23,7 @@ private:
 protected:
 	float mBlockW, mBlockH;
 public:
-	virtual void draw(const World::Camera &camera);
+	virtual void draw(const World::Camera &camera) const;
 	static Block * create(b2World &world, float x, float y, float angle);
 };
 

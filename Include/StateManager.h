@@ -2,7 +2,7 @@
  * StatateManager.h
  *
  *  Created on: Dec 7, 2016
- *      Author: £ukasz Kowalczyk
+ *      Author: ï¿½ukasz Kowalczyk
  */
 
 #ifndef StateMANAGER_H_
@@ -16,7 +16,7 @@
 
 namespace AngryZPR {
 
-class StateManager : public ControllerListener {
+class StateManager  {
 
 
 public:
@@ -26,15 +26,16 @@ public:
 	};
 
 	StateManager();
-	virtual ~StateManager();
+
 
 	void draw();
 	void update();
 	
+	/*
+	 * Zmien na nowy stan
+	 * \param state nowy stan
+	 */
 	void changeState(GameState state);
-
-	void acceptMouseEvent(MouseEvent ev, int x, int y) { };
-	void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) { };
 private:
 	GameState mGameState;
 	std::shared_ptr<World> mWorld;

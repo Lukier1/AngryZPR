@@ -2,7 +2,7 @@
  * SystemManager.h
  *
  *  Created on: Dec 6, 2016
- *      Author: �ukasz Kowalczyk
+ *      Author: �ukasz Kowalczyk
  */
 
 #ifndef INCLUDE_SYSTEMMANAGER_H_
@@ -31,21 +31,51 @@ private:
 public:
 	static SystemManager& getSingleton();
 	
-	void setWindow(unsigned short w, unsigned short h);
+
 	unsigned short getWindowH() const;
 	unsigned short getWindowW() const;
 
+	/*
+	 * Pobierz wydarzania i rozporwadz po sluchaczach
+	 */
 	void eventPoll();
 
+
+	/*
+	 * Metoda czysczaca ekran przed rysowaniem
+	 */
 	void beginDraw();
+	/*
+	 * Metoda konczaca rysowanie, która wrzuca rysowane obiekty na ekran
+	 */
 	void endDraw();
+	/*
+	 * Rysuj podany element
+	 * \param drawable - rysowany element
+	 * \param render_status - http://www.sfml-dev.org/documentation/2.4.1/classsf_1_1RenderStates.php
+	 */
 	void draw(const sf::Drawable& drawable, const sf::RenderStates& render_states=sf::RenderStates::Default);
 
+	/*
+	 *\return zwraca czy okno jest wciaz otwarte
+	 */
 	bool isOpen() const;
 
+	/*
+	 * Zarejestru nowego słuychacza
+	 * \param listener wskaznik na sluchacza
+	 */
 	void registerListener(std::shared_ptr<ControllerListener> listener);
+	/*
+	 * Wyrejestruj słuychacza
+	 * \param listener wskaznik na sluchacza
+	 */
 	void deregisterListener(std::shared_ptr<ControllerListener> listener);
 
+	/*
+	 * Podaj aktualna liczbe sluchaczy
+	 * \return liczba sluchaczy
+	 */
 	unsigned int getListenersNum() const;
 };
 

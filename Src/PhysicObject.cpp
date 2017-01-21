@@ -2,7 +2,7 @@
  * PhysicObject.cpp
  *
  *  Created on: Dec 14, 2016
- *      Author: £ukasz Kowalczyk
+ *      Author: ï¿½ukasz Kowalczyk
  */
 
 #include "../Include/PhysicObject.h"
@@ -53,4 +53,14 @@ b2Body * PhysicObject::createBody(b2World &world, float x, float y, float angle,
 
 	return body;
 }
-} /* namespace AngryZPR */
+PhysicObject::ObjectEvent AngryZPR::PhysicObject::update(float time) {
+	mX = mBody->GetPosition().x/WORLD_SCALE;
+	mY = mBody->GetPosition().y/WORLD_SCALE;
+
+	return PhysicObject::ObjectEvent::NONE;
+}
+
+}
+/* namespace AngryZPR */
+
+

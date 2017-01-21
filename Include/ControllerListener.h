@@ -9,7 +9,10 @@
 #define INCLUDE_CONTROLLERLISTENER_H_
 
 #include <SFML/Window/Event.hpp>
-namespace AngryZPR {
+namespace AngryZPR
+	/*
+	 * Interfejs dla obiektów nasłuchujących wydarzeń związanych z myszką i klawiaturą
+	 */{
 	class ControllerListener {
 	public:
 		enum class MouseEvent {
@@ -24,8 +27,18 @@ namespace AngryZPR {
 			KEY_RELASE
 		};
 
-
+		/*
+		 * Czysta funkcja wirtualna akceptujaca wydarzenia
+		 * \param ev - nazwa wydarzaenia
+		 * \param x - pozycja dla wydarzenia X
+		 * \param y - pozycja dla wydarzenia Y
+		 */
 		virtual void acceptMouseEvent(MouseEvent ev, int x, int y) = 0;
+		/*
+		 * Czysta funkcja wirtualna akceptujaca wydarzenia
+		 * \param ev - nazwa wydarzaenia
+		 * \param key - kod naciśnietego klawisza
+		 */
 		virtual void acceptKeyEvent(KeyEvent ev, sf::Keyboard::Key key) = 0;
 	};
 }

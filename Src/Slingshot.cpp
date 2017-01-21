@@ -2,7 +2,7 @@
  * Slingshot.cpp
  *
  *  Created on: Jan 10, 2017
- *      Author: £ukasz Kowalczyk
+ *      Author: ï¿½ukasz Kowalczyk
  */
 
 #include <iostream>
@@ -18,14 +18,15 @@ Slingshot::Slingshot() {
 }
 
 
-void Slingshot::draw(const World::Camera &camera) {
+void Slingshot::draw(const World::Camera &camera) const {
 	if(mState == State::PRELOADING)
 	{
-		float speed = getLengthVelocity();
+		float speed = getLengthVelocity()/(1.41f*MAX_RANGE); // MAX_RANGE * sqrt(2)
 		float angle = -getAngle(); 
 
 		const float LINE_LENGHT = 50.0f;
 		const float LINE_WIDTH = 2.0f;
+
 		sf::RectangleShape line(sf::Vector2f(speed*LINE_LENGHT, LINE_WIDTH));
 
 		line.setFillColor(sf::Color::Red);
@@ -65,7 +66,7 @@ WorldObject::ObjectEvent Slingshot::update(float time) {
 	return ObjectEvent::NONE;
 }
 
-bool Slingshot::isOverlapping(const World::Camera &camera, float x, float y)
+bool Slingshot::isOverlapping(const World::Camera &camera, float x, float y) const
 {
 	const float relX = x - camera.x, relY = y - camera.y;
 	if(relX >= mX && relX <= mX+WIDTH &&
@@ -79,8 +80,8 @@ void Slingshot::setPreload(const World::Camera &camera, float x, float y) {
 	if( mState == State::PRELOADING || mState == State::IDLE) {
 		float relX = x+camera.x-getX();
 		float relY = y+camera.y-getY();
-		if(relX > -10)
-			relX = -10;
+		if(relX > -MAX_RANGE)
+			relX = -MAX_RANGE;
 		if(relY  < 0 )
 			relY = 0;
 

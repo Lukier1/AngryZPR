@@ -2,7 +2,7 @@
  * Bird.cpp
  *
  *  Created on: Jan 10, 2017
- *      Author: £ukasz Kowalczyk
+ *      Author: ï¿½ukasz Kowalczyk
  */
 #include <iostream>
 
@@ -16,9 +16,8 @@ namespace AngryZPR {
 Bird::Bird(b2Body * _body) : PhysicObject(_body), mTimeNoSpeed(0) {
 }
 
-void Bird::draw(const World::Camera &camera) {
-	mX = mBody->GetPosition().x/WORLD_SCALE;
-	mY = mBody->GetPosition().y/WORLD_SCALE;
+void Bird::draw(const World::Camera &camera) const {
+
 	float angle = mBody->GetAngle();
 	
 	sf::RectangleShape rect(sf::Vector2f(10.0f, 10.0f));
@@ -34,12 +33,13 @@ Bird * Bird::createBird(b2World &world, float x, float y)  {
 
 	b2Body * body = PhysicObject::createBody(world, x, y, 0.0f, 5.0f, 0.0f, 0.0f, 0.3f, DEF_W, DEF_H);
 
-	//return new Block(body, DEF_W, DEF_H);
 	return new Bird(body);
 }
 
 
 WorldObject::ObjectEvent Bird::update(float time) {
+	mX = mBody->GetPosition().x/WORLD_SCALE;
+	mY = mBody->GetPosition().y/WORLD_SCALE;
 	
 	if (mBody->GetLinearVelocity().Length() < 0.1f)
 		mTimeNoSpeed += time;
