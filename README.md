@@ -17,14 +17,19 @@ Aby skompilować wchodzimy z konsoli do folderu AngryZPR(znajduję się tam plik
 
 --------------------------------------------------------
 Kompilacja:
-
+Linux:
 Wystarczy jedna komenda uruchomiana w folderze glownym
 
 make
 
+Windows:
+Należy stworzyc fodler Libs w folderze projektu, a w nim odpowiednio podązając za bakefilem dodać i skompilować odpowiednie biblioteki.
+Następnie kompilacja odbywa sie poprzez skompilowanie i uruchomienie projektu game.
+
+
 --------------------------------------------------------
 Uruchamianie:
-
+Linux:
 Do uruchomienia gry:
 
 ./game

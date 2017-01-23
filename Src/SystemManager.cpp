@@ -42,7 +42,7 @@ void SystemManager::eventPoll() {
 	{
 		if (event.type == sf::Event::Closed)
 			mWindow->close();
-		std::cout << event.type << std::endl;
+
 		switch (event.type + BUG_FIX) { // Wartośc zwieszkona o jeden w zwiazku z bugiem w SFML
 			case (sf::Event::MouseMoved):
 				updateMouseEvent(ControllerListener::MouseEvent::MOUSE_MOVE, event.mouseMove.x, event.mouseMove.y);

@@ -88,10 +88,10 @@ $(_builddir)test: $(_builddir)test_MockTest.o $(_builddir)test_Mock.o $(_builddi
 	$(CXX) -o $@ $(LDFLAGS) $(_builddir)test_MockTest.o $(_builddir)test_Mock.o $(_builddir)libAngryZPR.a -lsfml-graphics -lsfml-window -lsfml-system -lBox2D -pthread
 
 $(_builddir)test_MockTest.o: Test/MockTest.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -ILibs/boost_1_62_0 -std=c++11 Test/MockTest.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -std=c++11 Test/MockTest.cpp
 
 $(_builddir)test_Mock.o: Src/Mock.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -ILibs/boost_1_62_0 -std=c++11 Src/Mock.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -std=c++11 Src/Mock.cpp
 
 $(_builddir)game: $(_builddir)game_Main.o $(_builddir)libAngryZPR.a
 	$(CXX) -o $@ $(LDFLAGS) $(_builddir)game_Main.o $(_builddir)libAngryZPR.a -lsfml-graphics -lsfml-window -lsfml-system -lBox2D -pthread
