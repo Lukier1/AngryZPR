@@ -13,7 +13,8 @@ Jako że to narzędzie wymaga kompilacji pod linuksem, dołączam wygenerowany p
 Generowanie plików przez bakefile:
 Aby skompilować wchodzimy z konsoli do folderu AngryZPR(znajduję się tam plik AngryZPR.bkl) i nastepne poleceniami budujemy:
 
-<<Ścieżka do skompilowanego programu bakefile>>/bkl AngryZPR.bkl
+<Ścieżka do skompilowanego programu bakefile>/bkl AngryZPR.bkl
+
 --------------------------------------------------------
 Kompilacja:
 
