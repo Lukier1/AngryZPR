@@ -5,9 +5,17 @@
  *      Author: �ukasz Kowalczyk
  */
 
+
 #include <iostream>
 
 #include "../Include/SystemManager.h"
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+static const int BUG_FIX = 0;
+#else
+static const int BUG_FIX = 1;
+#endif
+
 
 using namespace sf;
 using namespace AngryZPR;
@@ -34,8 +42,8 @@ void SystemManager::eventPoll() {
 	{
 		if (event.type == sf::Event::Closed)
 			mWindow->close();
-
-		switch (event.type+1) { // Wartośc zwieszkona o jeden w zwiazku z bugiem w SFML
+		std::cout << event.type << std::endl;
+		switch (event.type + BUG_FIX) { // Wartośc zwieszkona o jeden w zwiazku z bugiem w SFML
 			case (sf::Event::MouseMoved):
 				updateMouseEvent(ControllerListener::MouseEvent::MOUSE_MOVE, event.mouseMove.x, event.mouseMove.y);
 
